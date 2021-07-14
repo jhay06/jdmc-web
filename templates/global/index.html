@@ -1,0 +1,97 @@
+<html>
+<head>
+    <title><?php echo $app->title;   ?></title>
+    <link rel="stylesheet" href="static/css/home.css" />
+    <script type="text/javascript" src="static/js/brython.js"></script>
+    <script type="text/javascript" src="static/js/brython_stdlib.js"></script>
+</head>
+<body onload="brython(1)">
+    <div id="main_theme">
+        <div class="login_form">
+            <form class="form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+                <div class='title-head'>
+                    <img src="static/images/jmdc-logo-small.png"/>
+                    <h2><?php echo $app->title; ?></h2>
+                </div>
+                <div class='input'>
+
+                <label>USERNAME OR EMAIL ADDRESS</label>
+                <br/>
+                <input type="text" name="username" 
+                placeholder="Username or Email" />
+                <br/>
+                </div>
+                <br/>
+                <div class="input">
+                    <label>PASSWORD</label>
+                    <br/>
+                    <input type="password" name="password"
+                    placeholder="Password" />
+                </div>
+               <center>
+                <div class='forgot-con'>
+                <a class='link-left' href='forgot.php'>Forgot password?</a>
+                </div>
+                <button type='submit' class='full_btn'
+                name='login'>Sign In</button>
+                </center>
+                <div class='not-member-con'>
+                    Not yet a member? Sign up <a href='sign-up.php' class='link-left'>here</a>.
+                </div>
+
+            </form>
+        <div class='footer'>
+           
+        </div>
+            
+        </div>
+        <div class="menu_of_service">
+            <div class='menu'>
+
+                <div class='home-icons'>
+                <a href='aboutus.php'>
+                    <img src='static/images/about-us.png'/>
+                    <br/>
+                    <label>ABOUT US</label>
+                </a>
+
+                </div>
+
+                <div class='home-icons'>
+                <a href='products.php'>
+                    <img src='static/images/services.png'/>
+                    <br/>
+                    <label>SERVICES</label>
+                </a>
+                </div>
+
+                <div class='home-icons'>
+
+
+                <a href='contactus.php'>
+                    <img src='static/images/contact-us.png'/>
+                    <br/>
+                    <label>CONTACT US</label>
+                </a>
+
+                </div>
+                  <div class='home-icons'>
+                <a href='tutorial.php'>
+                    <img src='static/images/tutorial.png'/>
+                    <br/>
+                    <label>TUTORIAL</label>
+                </a>
+                </div>
+                <br class='clear'/>
+
+
+
+
+            </div>
+        </div>
+        <br class="clear"/>
+    </div>
+
+</body>
+
+</html>

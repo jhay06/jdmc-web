@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  jmdc-webapp:
+    build: .
+    volumes:
+      - '.:/jmdc'
+    ports:
+      - 2022:2022
+

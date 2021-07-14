@@ -1,0 +1,14 @@
+{
+    "url_rewrite":{
+        "/":"controller/index.php",
+        "/index.php":"controller/index.php",
+        "/accreditation":"controller/accreditation.php",
+        "/registration":"controller/registration.php",
+        "/accreditation/new":"controller/accreditation-new.php",
+        "/registration/new":"controller/registration-new.php",
+        "error/%s":"templates/error/%s.html"
+       
+        
+    }
+
+}

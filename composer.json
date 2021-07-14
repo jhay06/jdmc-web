@@ -1,0 +1,5 @@
+{
+    "require": {
+        "karriere/json-decoder": "^4.0"
+    }
+}

@@ -1,0 +1,17 @@
+{
+    "app":{
+        "title":"Jagas Medicadenta Corporation",
+        "code":"JDMC",
+        "copyright":"2021",
+        "webmaster":"admin@webmaster.com"
+    },
+    "owner":{
+        "name":"",
+        "address":"",
+        "contact_number":""
+    },
+    "api":{
+        "api_key":"myapikey_code",
+        "api_endpoint":"http://localhost:2021/graphql"
+    }
+}
