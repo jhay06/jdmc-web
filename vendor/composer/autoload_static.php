@@ -10,6 +10,7 @@ class ComposerStaticInita50d7c577f3a0ee4d7a81798b1384426
         'P' => 
         array (
             'PhpDocReader\\' => 13,
+            'PHPMailer\\PHPMailer\\' => 20,
         ),
         'K' => 
         array (
@@ -21,6 +22,10 @@ class ComposerStaticInita50d7c577f3a0ee4d7a81798b1384426
         'PhpDocReader\\' => 
         array (
             0 => __DIR__ . '/..' . '/php-di/phpdoc-reader/src/PhpDocReader',
+        ),
+        'PHPMailer\\PHPMailer\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phpmailer/phpmailer/src',
         ),
         'Karriere\\JsonDecoder\\' => 
         array (

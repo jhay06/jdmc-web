@@ -1,19 +1,31 @@
-        <div class="container-fluid dash-menu-menu">
+<?php $current_user=$GLOBALS['_user']; ?>
+  <div class="container-fluid dash-menu-menu">
           <a href="/dashboard"><img src="/static/images/dashboard.png" width="20px">&nbsp;&nbsp;&nbsp;Dashboard</a>
         </div>
         <hr>
         <div class="container-fluid dash-menu-menu">
           <a href="/appointment"><img src="/static/images/appointment.png" width="20px">&nbsp;&nbsp;&nbsp;Appointment</a>
         </div>
-        <div class="container-fluid dash-menu-menu">
-          <a href="/accreditation" class="active"><img src="/static/images/accreditation.png" width="20px">&nbsp;&nbsp;&nbsp;Accreditation</a>
-        </div>
+        <?php
+        if($current_user->profile_id !=3){
+          echo '<div class="container-fluid dash-menu-menu">';
+          echo '<a href="/accreditation" class="active"><img src="/static/images/accreditation.png" width="20px">&nbsp;&nbsp;&nbsp;Accreditation</a>';
+          echo '</div>';
+        }
+        ?>
         <div class="container-fluid dash-menu-menu">
           <a href="/products"><img src="/static/images/products.png" width="20px">&nbsp;&nbsp;&nbsp;Products</a>
         </div>
-        <div class="container-fluid dash-menu-menu">
-          <a href="/registration"><img src="/static/images/registration.png" width="20px">&nbsp;&nbsp;&nbsp;Registration</a>
-        </div>
+        <?php 
+          if($current_user->profile_id == 1){
+              echo '<div class="container-fluid dash-menu-menu">';
+              echo '<a href="/registration"><img src="/static/images/registration.png" width="20px">&nbsp;&nbsp;&nbsp;Registration</a>';
+              echo '</div>';
+      
+          }
+          ?>
         <div class="container-fluid dash-menu-menu">
           <a href="/settings"><img src="/static/images/settings.png" width="20px">&nbsp;&nbsp;&nbsp;Settings</a>
         </div>
+
+  

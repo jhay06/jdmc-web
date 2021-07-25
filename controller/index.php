@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 use API\Mutation\APILogin;
 use API\Response\BaseResponse;
 $has_error=false;
@@ -15,17 +15,20 @@ if(isset($_POST['login'])){
 
        
     }else{
-       $res=$api_login->get_result();
+       
+       $res=$api_login->get_result()['data'];
+       
        $_SESSION['username']=$res['username'];
        $_SESSION['login_hash']=$res['login_hash'];
-
+        
 
     }
   
 }
 
+
 if(isset($_SESSION['username']) && isset($_SESSION['login_hash'])){
-    header('Location:/registration');
+    header('Location:/dashboard');
 }else{
     include_once("templates/global/index.html");
 

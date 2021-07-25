@@ -4,9 +4,7 @@ namespace Api\Inputs;
 use Api\ApiModel;
 use Api\Response\BaseResponse;
 use Channel\GraphQL\GraphQLConnector;
-require("api/mutation/login.php");
-require("api/mutation/register.php");
-require("api/query/get_user_list.php");
+
 
 class BaseInput{
     private  $apimodel;

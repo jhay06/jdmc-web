@@ -1,5 +1,4 @@
 <?php
-
 namespace Api\Query;
 use Api\Inputs\BaseInput;
 
@@ -10,6 +9,5 @@ class APIGetUserList extends BaseInput{
         parent::__construct("get_user_list");
     }
 }
-
 
 ?>

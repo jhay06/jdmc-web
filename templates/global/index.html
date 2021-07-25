@@ -1,45 +1,67 @@
 <html>
 <head>
-    <title><?php echo $app->title;   ?></title>
+    <title><?php echo $GLOBALS['app']->title;   ?></title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+ 
     <link rel="stylesheet" href="static/css/home.css" />
+    <link rel="stylesheet" href="/static/css/style.css">
     <script type="text/javascript" src="static/js/brython.js"></script>
-    <script type="text/javascript" src="static/js/brython_stdlib.js"></script>
+    <script type='text/javascript' src='/static/js/brython_stdlib.js'></script>
+    <script src='/static/js/jquery-3.6.0.min.js'></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </head>
 <body onload="brython(1)">
     <div id="main_theme">
         <div class="login_form">
-            <form class="form" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
-                <div class='title-head'>
-                    <img src="static/images/jmdc-logo-small.png"/>
-                    <h2><?php echo $app->title; ?></h2>
-                </div>
-                <div class='input'>
+                
 
-                <label>USERNAME OR EMAIL ADDRESS</label>
-                <br/>
-                <input type="text" name="username" 
-                placeholder="Username or Email" />
-                <br/>
-                </div>
-                <br/>
-                <div class="input">
-                    <label>PASSWORD</label>
-                    <br/>
-                    <input type="password" name="password"
-                    placeholder="Password" />
-                </div>
-               <center>
-                <div class='forgot-con'>
-                <a class='link-left' href='forgot.php'>Forgot password?</a>
-                </div>
-                <button type='submit' class='full_btn'
-                name='login'>Sign In</button>
-                </center>
-                <div class='not-member-con'>
-                    Not yet a member? Sign up <a href='sign-up.php' class='link-left'>here</a>.
-                </div>
+                <?php 
+                    if(isset($_GET['action'])){
+                        if($_GET['action']=='signup'){
+                            $username=null;
+                            $employee_no=null;
+                            $first_name=null;
+                            $last_name=null;
+                            $middle_name=null;
+                            $email_address=null;
+                            echo '<h4 align="center">Sign up for a new account</h4>';
+                            echo "<style>
+                                .login_form .form{
+                                   top:5% !important;
+                                   width: 75% !important;
+                                   left:10% !important;
+                                }
+                                .button-control{
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    margin: 20;
+                                }
+                                .button-control input[name=reg]{
+                                    background-color: var(--info);
+                                    margin-right:20px;
+                                }
+                            </style>";
+                            $cancel_url="/";
+                            $is_activated=false;
+                            $date_registered="";
+                            $cable_url="/modules/api_cable/registration_cable.php";
+                            if(isset($_POST['registration_ok'])){
+        
+                                $registration_ok=$_POST['registration_ok']==='true'?true:false;
+                                if($registration_ok){
+                                    include_once("templates/artifacts/password_prompt.html");
+                        
+                                }
+                            }
+                            include "templates/artifacts/registration_form.html";
+                        }
+                    }else{
+                        include "templates/artifacts/login_form.html"; 
 
-            </form>
+                    }
+                 ?>
         <div class='footer'>
            
         </div>
@@ -91,7 +113,9 @@
         </div>
         <br class="clear"/>
     </div>
-
+   
+  
+   
 </body>
 
 </html>

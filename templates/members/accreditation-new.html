@@ -1,15 +1,30 @@
+<?php
+$cable_url="/modules/api_cable/accreditation_cable.php";
+$title="Accreditation (New Member) - JMDC Diagnostic Center";
+$head="Accreditation (New Member)";
+if(isset($_GET['action'])){
+  $title="Update Information - JMDC Diagnostic Center";
+  $head="Update Account (".$_GET['user'].")";
+  $cable_url="/modules/api_cable/update_information.php";
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Accreditation (New Member) - JMDC Diagnostic Center</title>
+<title><?php echo $title; ?></title>
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="/static/css/style.css">
+  <script src='/static/js/brython.js'></script>
+  <script src='/static/js/brython_stdlib.js'></script>
+ <!---
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+ -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
   <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
@@ -17,7 +32,7 @@
 
 </style>
 </head>
-<body>
+<body onload='brython(1)'>
   <div id="myNav" class="dash-overlay">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <div class="dash-overlay-content">
@@ -52,16 +67,19 @@
     </div>
     <div class="col dash-body">
       <div class="container-fluid pt-3 body-title">
-        <h4>Accreditation (New Member)</h4>
+        <h4><?php echo $head; ?></h4>
       </div>
       <div class="container form-appointment">
-  <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method='POST'>
+  <form action="<?php echo $_SERVER['PHP_SELF']; ?>" name='accreditation_form' method='POST'>
+    <input type='hidden' name='updating' value='<?php echo $is_updating; ?>'/>
+    <input type='hidden' name='accreditation_ok' value='false'/>
+    <input type='hidden' name='generated_password' value=''/>
     <div class="row">
       <div class="col-25">
         <label for="UserName">User Name :</label>
       </div>
       <div class="col-75">
-        <input class="form-control" type="text" id="UserName" name="username">
+        <input class="form-control" type="text" id="UserName" name="username" value="<?php echo $username; ?>">
       </div>
     </div>
     <div class="row">
@@ -69,7 +87,7 @@
         <label for="LastName">Last Name :</label>
       </div>
       <div class="col-75">
-        <input class="form-control" type="text" id="LastName" name="last_name">
+        <input class="form-control" type="text" id="LastName" name="last_name" value="<?php echo $last_name; ?>">
       </div>
     </div>
     <div class="row">
@@ -77,7 +95,7 @@
         <label for="FirstName">First Name :</label>
       </div>
       <div class="col-75">
-        <input class="form-control" type="text" id="FirstName" name="first_name">
+        <input class="form-control" type="text" id="FirstName" name="first_name" value="<?php echo $first_name; ?>">
       </div>
     </div>
     <div class="row">
@@ -85,7 +103,7 @@
         <label for="MiddleName">Middle Name :</label>
       </div>
       <div class="col-75">
-        <input class="form-control" type="text" id="MiddleName" name="middle_name">
+        <input class="form-control" type="text" id="MiddleName" name="middle_name" value="<?php echo $middle_name; ?>">
       </div>
     </div>
     <div class="row">
@@ -93,7 +111,7 @@
         <label for="ContactNumber">Contact Number :</label>
       </div>
       <div class="col-75">
-        <input class="form-control" type="text" id="ContactNumber" name="contact_number">
+        <input class="form-control" type="text" id="ContactNumber" name="contact_number" value="<?php echo $contact_no; ?>">
       </div>
     </div>
     <div class="row">
@@ -101,7 +119,7 @@
         <label for="EmailAddress">Email Address :</label>
       </div>
       <div class="col-75">
-        <input class="form-control" type="text" id="EmailAddress" name="email_address">
+        <input class="form-control" type="text" id="EmailAddress" name="email_address" value="<?php echo $email_address; ?>">
       </div>
     </div>
     <div class="row">
@@ -111,9 +129,9 @@
       <div class="col-75">
         <select class="form-control" id="AffiliateLevel" name="affiliate_level">
           <option value="" selected disabled>Please select</option>
-          <option value="1">Platinum</option>
-          <option value="2">Gold</option>
-          <option value="3">Silver</option>
+          <option value="1" <?php if ($affiliate_level_id ==1){ echo "selected"; } ?> >Platinum</option>
+          <option value="2" <?php if ($affiliate_level_id ==2){ echo "selected"; } ?> >Gold</option>
+          <option value="3" <?php if ($affiliate_level_id ==3){ echo "selected"; } ?> >Silver</option>
         </select>
       </div>
     </div>
@@ -151,5 +169,137 @@ function closeNav() {
   document.getElementById("myNav").style.width = "0%";
 }
 </script>
+<script type="text/python">
+  import jquery
+  
+  from browser import alert,window
+  jq=window.jQuery
+  from validations.base_validation import BaseValidation
+  import json
+  def registration_connection_failed(res,status,xhr):
+    alert('Connection to server not established')
+  def registration_connection_ok(res,status,xhr):
+    if status=='success':
+      result=json.loads(res)
+      if result['status'] != 'success':
+        alert(result['message'])
+        return False
+  
+      else:
+        jq('input[name=accreditation_ok]').val('true')
+        if 'password' in result.keys():
+          jq('input[name=generated_password]').val(result['password'])
+        jq('form[name=accreditation_form]').submit()
+  
+  
+  def reg_click(e,base_validator:BaseValidation=None):
+    e.preventDefault()
+    if base_validator is None:
+      alert('Connection to the server was not established')
+      return False
+    first_name_val=jq("input[name=first_name]").val()
+    middle_name_val=jq("input[name=middle_name]").val()
+    last_name_val=jq("input[name=last_name]").val()
+    contact_no_val=jq("input[name=contact_number]").val()
+    username_val=jq("input[name=username]").val()
+    email_address_val=jq("input[name=email_address]").val()
+    affiliate_level_val=jq("select[name=affiliate_level]").val()
+    if not username_val:
+      alert('Please input username')
+      return False
+    if not last_name_val:
+      alert('Please input last name')
+      return False
+    if not first_name_val:
+      alert('Please input first name')
+      return False
+    if not contact_no_val:
+      alert('Please input contact number')
+      return False
+    if not email_address_val:
+      alert('Please input email address')
+      return False
+  
+
+    if not affiliate_level_val:
+      alert('Please select affiliate level')
+      return False
+  
+    username_err=base_validator.validate('username',username_val)
+    last_name_err=base_validator.validate('last_name',last_name_val)
+    first_name_err=base_validator.validate('first_name',first_name_val)
+    middle_name_err=base_validator.validate('middle_name',middle_name_val)
+    contact_no_err=base_validator.validate('contact_number',contact_no_val)
+    email_address_err=base_validator.validate('email_address',email_address_val)
+    if username_err:
+      alert(username_err)
+      return False
+    if last_name_err:
+      alert(last_name_err)
+      return False
+    if first_name_err:
+      alert(first_name_err)
+      return False
+    if middle_name_err:
+      alert(middle_name_err)
+      return False
+    if contact_no_err:
+      alert(contact_no_err)
+      return False
+  
+    if email_address_err:
+      alert(email_address_err)
+      return False
+    data={
+      'username':username_val,
+      'first_name':first_name_val,
+      'last_name':last_name_val,
+      'middle_name':middle_name_val,
+      'contact_number':contact_no_val,
+      'email_address':email_address_val,
+      'affiliate_level':affiliate_level_val,
+      'accreditation_save':'ok'
+    }
+    data['level']='dentist'
+    data['old_username']='<?php echo $username; ?>'
+    data['is_activated']='<?php echo $is_activated; ?>'
+    data['date_registered']='<?php echo $date_registered; ?>'
+    jq.post('<?php echo $cable_url; ?>',data,registration_connection_ok).fail(registration_connection_failed)
+  
+  def open_cable(has_validator=False,validator=[]):
+    if not has_validator:
+      alert('Connection to the server was not established')
+      return False
+    jq('input[name=accreditation_save]').click(lambda e,base_validator=BaseValidation(validator):reg_click(e,base_validator))
+  
+     
+    
+    
+  
+  def validator_ready(res,status,xhr):
+    if status=='success':
+      try:
+        result=json.loads(res)
+        if result['status']=='success':
+            open_cable(has_validator=True,validator=result['data'])
+        else:
+           alert(result['message'])
+      except:
+        alert('Could not connect to server')
+  def validator_failed(res):
+    open_cable()
+    
+  validators={ "validate":['username',
+                          'first_name',
+                          'middle_name',
+                          'last_name',
+                          'contact_number',
+                          'email_address'
+
+                          ],
+                          "validator":"validate"  
+              }
+  jq.post("/modules/api_cable/get_validator_cable.php",validators,validator_ready).fail(validator_failed)
+</script>  
 </body>
 </html>

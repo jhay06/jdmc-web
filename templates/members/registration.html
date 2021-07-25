@@ -13,11 +13,13 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
   <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+  <script src='/static/js/brython.js'></script>
+  <script src='/static/js/brython_stdlib.js'></script>
 <style>
 
 </style>
 </head>
-<body>
+<body onload="brython(1)">
   <div id="myNav" class="dash-overlay">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <div class="dash-overlay-content">
@@ -58,6 +60,21 @@
         </div>
       </div>
       <div class="container tbl-con" style="width: 100%; padding: 0;">
+
+        <?php 
+if(isset($_POST['registration_ok'])){
+    echo "<br/>";
+    if($_POST['updating']){
+      echo "<div class='alert alert-success' role='alert'>
+        Account of ".$_POST['username']." has been updated
+      </div>";
+    }else{
+      
+      include_once("templates/artifacts/password_prompt.html");
+    }
+    
+}
+ ?>
         <div class="table-responsive" style="margin-bottom: 20px; width: 100%; padding-left: 15px;" >
       <table class="table table-hover" style="margin-top: 15px; margin-left: -15px; width: 100%;">
         <thead class="thead-dark">
@@ -84,8 +101,8 @@
                 echo "<td>".$user['last_name']."</td>";
                 echo "<td>".$user['first_name']."</td>";
                 echo "<td>".$user['middle_name']."</td>";
-                
-                echo "<td><a href=\"registration-edit?ID=1\"><img src=\"static/images/edit.png\"></a></td>";
+                $edit_url='staff/'.$user['username'].'/edit';
+                echo "<td><a href='".$edit_url."'><img src=\"static/images/edit.png\"></a></td>";
                 echo "</tr>";
                 $i++;
               }

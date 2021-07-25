@@ -2,13 +2,23 @@
     "url_rewrite":{
         "/":"controller/index.php",
         "/index.php":"controller/index.php",
+        "/dashboard":"controller/dashboard.php",
+        "/signup":"controller/index.php?action=signup",
+        "/products":"controller/product.php",
+        "/appointment":"controller/appointment.php",
         "/accreditation":"controller/accreditation.php",
         "/registration":"controller/registration.php",
         "/accreditation/new":"controller/accreditation-new.php",
         "/registration/new":"controller/registration-new.php",
-        "error/%s":"templates/error/%s.html"
-       
-        
+        "/logout":"controller/logout.php",
+        "/staff/(.*)/edit":"controller/registration-new.php?action=edit&user=$1",
+        "/dentist/(.*)/edit":"controller/accreditation-new.php?action=edit&user=$1",
+        "/settings":"controller/settings.php",
+        "/error/[0-9]":"templates/error/$1.html"
+    },
+    "error":{
+        "404":"/error/404",
+        "500":"/error/500"
     }
 
 }

@@ -35,9 +35,9 @@ class ApiModel{
 
     function get_response(BaseResponse $response,$model=null){
         if($model !=null){
-           return $response->data[$model]['data'];
+           return $response->data[$model];
         }else{
-            return $response->data[$this->model]['data'];
+            return $response->data[$this->model];
         }
        
     }

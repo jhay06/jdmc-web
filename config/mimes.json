@@ -20,8 +20,9 @@
         "route":false
     },
     ".php":{
-        "mime":"application/x-php",
-        "route":true
+        "mime":"application/php",
+        "route":false,
+        "execute":true
     },
     ".html":{
         "mime":"text/html",

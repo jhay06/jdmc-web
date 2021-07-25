@@ -62,6 +62,19 @@ use Modules\Constants\AffiliateLevel;
         </div>
       </div>
       <div class="container tbl-con" style="width: 100%; padding: 0;">
+        <?php 
+        if(isset($_POST['accreditation_ok'])){
+          echo "<br/>";
+          if($_POST['updating']){
+            echo "<div class='alert alert-success' role='alert'>
+              Account of ".$_POST['username']." has been updated
+            </div>";
+          }else{
+            
+            include_once("templates/artifacts/password_prompt.html");
+          }          
+        }
+         ?>
         <div class="table-responsive" style="margin-bottom: 20px; width: 100%; padding-left: 15px;" >
       <table class="table table-hover" style="margin-top: 15px; margin-left: -15px; width: 100%;">
         <thead class="thead-dark">
@@ -93,7 +106,8 @@ use Modules\Constants\AffiliateLevel;
                 echo "<td>".$user['contact_number']."</td>";
                 echo "<td>".$user['email_address']."</td>";
                 echo "<td>".AffiliateLevel::get_name( $user['affiliate_level_id'])."</td>";
-                echo "<td><a href=\"registration-edit?ID=1\"><img src=\"static/images/edit.png\"></a></td>";
+                $edit_url="dentist/".$user['username']."/edit";
+                echo "<td><a href='".$edit_url."'><img src=\"static/images/edit.png\"></a></td>";
                 echo "</tr>";
                 $i++;
               }
