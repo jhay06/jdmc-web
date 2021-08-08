@@ -8,6 +8,7 @@ if($current_user->profile_id ==3){
     exit;
 }  
 
+/*
 $api_list=new APIGetUserList();
 
 $api_list->profile_id=3;
@@ -17,6 +18,7 @@ if($res !=null){
       $user_list=$api_list->get_result()['data']['users'];
    }
 }
+*/
 
 include("templates/members/accreditation.html");
 ?>

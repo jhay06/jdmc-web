@@ -12,6 +12,6 @@
     },
     "api":{
         "api_key":"myapikey_code",
-        "api_endpoint":"http://localhost:2021/graphql"
+        "api_endpoint":"http://192.168.254.45:2021/graphql"
     }
 }

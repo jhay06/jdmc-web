@@ -1,0 +1,72 @@
+html,body{
+    margin:0;
+    width: 100%;
+    height:100vh;
+    background-color: #D9E4EC;
+    overflow:hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+#forgot_theme{
+    background-color: #D9E4EC;
+    width: 100%;
+    height:100%;
+    
+    
+}
+#forgot_theme .header{
+    width: 100%;
+    height:10%;
+    overflow: hidden;
+    background:#6F9FB9;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+}
+
+#forgot_theme .header img{
+    width: 50px;
+
+}
+#forgot_theme .header .title{
+    font-weight: 500;
+    color:#ffffff;
+    margin-left:10px;
+    font-size:18px;
+    letter-spacing: 0.15em;
+}
+#forgot_theme .content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ 
+    padding:0px 20px;
+}
+
+.content .actual-content{
+    width:32%;
+    height: 100%;
+    border:1px solid #a8a8a8;   
+    padding:20px 10px;
+    margin-top:5%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: #888888 2px 2px;
+    
+}
+
+.content div form{
+    width:80%;
+    text-align: center;
+    
+}
+.invalid-link{
+    padding:20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column;
+}

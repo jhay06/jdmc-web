@@ -11,17 +11,20 @@ use Modules\Constants\AffiliateLevel;
 <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/css/datatables.min.css">
   <link rel="stylesheet" href="/static/css/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
   <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+  <script src='/static/js/brython.js'></script>
+  <script src='/static/js/brython_stdlib.js'></script>
 <style>
 
 </style>
 </head>
-<body>
+<body onload="brython(0)">
   <div id="myNav" class="dash-overlay">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <div class="dash-overlay-content">
@@ -76,7 +79,7 @@ use Modules\Constants\AffiliateLevel;
         }
          ?>
         <div class="table-responsive" style="margin-bottom: 20px; width: 100%; padding-left: 15px;" >
-      <table class="table table-hover" style="margin-top: 15px; margin-left: -15px; width: 100%;">
+      <table class="table table-hover user_list" style="margin-top: 15px; margin-left: -15px; width: 100%;">
         <thead class="thead-dark">
           <tr>
             <th scope="col">#</th>
@@ -145,6 +148,49 @@ function openNav() {
 function closeNav() {
   document.getElementById("myNav").style.width = "0%";
 }
+</script>
+<script type='text/python'>
+  
+ from users.get_user_list import GetUserList 
+ import datatables
+ from browser import window
+ import jquery 
+ jq=window.jQuery
+ dataTable=jq('.user_list').DataTable()
+ from users.affiliate_level import AffiliateLevel
+
+ def list_loaded(is_connected,res):
+    if is_connected:
+       if res['status']=='success':
+       
+          users=res['data']['users']
+         
+          data_set=[]
+          row=1
+          for x in users:
+            data=[]
+            data.append(row)
+            data.append(x['username'])
+            data.append(x['last_name'])
+            data.append(x['first_name'])
+            data.append(x['middle_name'])
+            data.append(x['contact_number'])
+            data.append(x['email_address'])
+            print(x['affiliate_level_id'])
+            data.append(AffiliateLevel.get_name(x['affiliate_level_id']))
+          
+            edit_url='dentist/'+x['username']+'/edit'
+            data.append("<a href='"+edit_url+"'><img src=\"static/images/edit.png\"></a>")
+            row+=1
+            data_set.append(data)
+          dataTable.destroy()
+          jq('.user_list').DataTable({
+            "data":data_set
+          })
+        
+        
+ user_list=GetUserList(3)
+ user_list.get_list(list_loaded)
 </script>
 </body>
 </html>

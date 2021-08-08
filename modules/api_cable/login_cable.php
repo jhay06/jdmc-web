@@ -11,7 +11,7 @@ if(isset($_POST['login'])){
     $api_login->password=$_POST['password'];
     
     $var=$api_login->process();
- 
+
     if($api_login->is_error()){
         $has_error=true;
         $error="Unknown error, Please try again later.";

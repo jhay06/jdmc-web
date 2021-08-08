@@ -14,7 +14,8 @@
         "/staff/(.*)/edit":"controller/registration-new.php?action=edit&user=$1",
         "/dentist/(.*)/edit":"controller/accreditation-new.php?action=edit&user=$1",
         "/settings":"controller/settings.php",
-        "/error/[0-9]":"templates/error/$1.html"
+        "/error/[0-9]":"templates/error/$1.html",
+        "/forgot_password":"controller/forgot.php"
     },
     "error":{
         "404":"/error/404",

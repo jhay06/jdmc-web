@@ -1,6 +1,7 @@
 <?php
 session_start();
-error_reporting(E_ALL);
+
+error_reporting(E_ERROR);
 ini_set('display_errors', true);
 ini_set('display_startup_errors', true);
 ini_set('xmlrpc_errors', true);
@@ -11,19 +12,19 @@ require('includes/require_components.php');
 //require("modules/constants/affiliate_level.php");
 
 $config=new Configuration("global.json");
-$app=$config->get_app_config();
-$api=$config->get_api_config();
+$GLOBALS['app']=$config->get_app_config();
+$GLOBALS['api']=$config->get_api_config();
 if(isset($_SESSION['login_hash'])){
-    $_user=json_decode(base64_decode($_SESSION['login_hash']));
+    $GLOBALS['_user']=json_decode(base64_decode($_SESSION['login_hash']));
 }
-$_location="/";
+$GLOBALS['_location']="/";
 
 class Router{
     private $config_file;
     function __construct($config_file=null){
         $this->config_file=$config_file;
     }
-    function is_routed($request_uri){
+    function is_routed($request_uri,$query=null){
         $path="config/mimes.json";
         $file=fopen($path,"r");
         $mime_txt=fread($file,filesize($path));
@@ -31,8 +32,11 @@ class Router{
         $mime_array= json_decode($mime_txt);
         $keys=array_keys((array) $mime_array);
         $i=-1;
+                    
+        
         foreach($keys as $key){
-            
+                    
+         
             if(substr_count($request_uri,$key) >  0){
                 $route=$mime_array->{$key};
                 $routed=$route->route;
@@ -47,10 +51,17 @@ class Router{
                     if($request_uri[0]=='/'){
                         $request_uri=substr($request_uri,1,strlen($request_uri)-1);
                     }
-                    
                     if($execute){
                         if(file_exists($request_uri)){
-                            include($request_uri);
+                           
+                                if($query !=null){
+                                    $_parser=parse_str($query,$output);
+                                    foreach($_parser as $key=>$value){
+                                        $_GET[$key]=$value;
+                                    }
+                                }
+                                include($request_uri);
+                           
 
                         }else{
                             http_response_code(404);
@@ -67,6 +78,12 @@ class Router{
                              $file=fopen($request_uri,'rb');
                              $data=fread($file,filesize($request_uri));
                              fclose($file);
+                             if($query !=null){
+                                $_parser=parse_str($query,$output);
+                                foreach($_parser as $key=>$value){
+                                    $_GET[$key]=$value;
+                                }
+                            }
                              echo $data;
                             
       
@@ -93,6 +110,7 @@ class Router{
            
             if(preg_match_all($pattern,$lookup,$matches)){
                 if(count($matches) > 1){
+                    
                     return preg_replace($pattern,$value,$lookup);
                 }
                
@@ -111,17 +129,30 @@ class Router{
                 $file=fopen($path,"r");
                 $data=fread($file,filesize($path));
                 fclose($file);
-                $request_uri=$_SERVER['PHP_SELF'];
+                $request_uri=$_SERVER['REQUEST_URI'];
+                $_SERVER['PHP_SELF']=$request_uri;
+                $request_uri_sp=explode('?',$request_uri);
+                
+                $request_uri=$request_uri_sp[0];
                 $json_data=json_decode($data);
+                $query=null;
               
-                $routed=$this->is_routed($request_uri);
+                if(count($request_uri_sp) > 1){
+                    $_parser=parse_str($request_uri_sp[1],$output);
+                    foreach($output as $key=>$value){
+                        $_GET[$key]=$value;
+                    }
+                }
+             
+                $routed=$this->is_routed($request_uri,$request_uri_sp[1]);
                 if($routed){
+                   
                     $map=$this->get_map($json_data->url_rewrite,$request_uri);
                     if(!$map){
 
                         $map=$json_data->url_rewrite->{$request_uri};
                     }
-                 
+                    $_SERVER['PHP_SELF']=$request_uri;
                     $actual_page=explode("?",$map);
                    
                     if($map !=null){
@@ -157,7 +188,6 @@ class Router{
 
 }
 
-$route=new Router("routing_config.json");
-$route->start_routing();
+
 
 ?>

@@ -16,6 +16,9 @@ require("api/mutation/login.php");
 require("api/mutation/register.php");
 require("api/mutation/update_account.php");
 require("api/mutation/change_password.php");
+require("api/mutation/change_password_via_forgot.php");
+require("api/mutation/forgot_password.php");
+require("api/mutation/is_valid_key.php");
 /* end of mutation block */
 
 /* this block is for query api */

@@ -1,7 +1,10 @@
-FROM php
+FROM debian
+RUN addgroup lighttpd && useradd -g lighttpd lighttpd
+RUN apt-get update -y && apt-get install  nano lighttpd php-cgi php \
+        php-ctype openssl unzip php-xml php-json php-xmlreader php-dom -y
 
-EXPOSE 2022
-RUN mkdir /jmdc
-WORKDIR /jmdc
+RUN lighttpd -f /etc/lighttpd/lighttpd.conf
+#RUN service lighttpd start
+EXPOSE 80
 
-CMD ["php","-S","0.0.0.0:2022","router.php"]
+#CMD ["tail","-f","/dev/null"]

@@ -1,6 +1,7 @@
 <form class="form login-form"  action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
     <div class='title-head'>
         <img src="static/images/jmdc-logo-small.png"/>
+       
         <h2><?php echo $GLOBALS['app']->title; ?></h2>
     </div>
     <div class='input'>
@@ -33,7 +34,7 @@
 
 <script type='text/python'>
     import jquery
-    
+
     from browser import alert,window,bind,html
     from browser.widgets.dialog import Dialog,EntryDialog,InfoDialog
     import json
