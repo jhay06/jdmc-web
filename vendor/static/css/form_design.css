@@ -1,0 +1,54 @@
+.login_form{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+
+}
+.login_form .form-container{
+    width: 95%;
+
+}
+.login_form h3{
+    font-size:20px;
+    font-weight: bold;
+    color:var(--accent3);
+    text-align: center;
+
+}
+.forgot-con{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    font-size:15px;
+    flex-direction: row-reverse;
+}
+.forgot-con .forgot-link{
+    font-size:15px;
+}
+.login_form .not-member-con{
+  
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: row;
+
+}
+.not-member-con a{
+    font-size:18px !important;
+    padding: 0px !important;
+
+}
+
+
+.button-control{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+.button-control input[type=submit], .button-control a{
+    font-size:18px !important;  
+    padding:5px 10px !important; 
+    margin:20px;
+}

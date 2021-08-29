@@ -1,0 +1,73 @@
+<html>
+    <head>
+        <title><?php echo $GLOBALS['app']->title;   ?></title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/static/css/forgot.css"/>
+         <script type="text/javascript" src="static/js/brython.js"></script>    
+         <script type='text/javascript' src='/static/js/brython_stdlib.js'></script>
+    </head>
+    <body onload='brython(0)'>
+        <div id='forgot_theme'>
+            <div class='header'>
+                <img src="static/images/jmdc-logo-small.png"/>
+                <h6 class='title'><?php echo $GLOBALS['app']->title;   ?></h6>
+            </div>
+            <div class='content'>
+                <div class='actual-content'>
+                    <br/>
+                    <?php
+
+                        if(isset($new_style)){
+                            echo $new_style;
+                        }
+                    ?>
+                    <div class='invalid-link'>
+                        <div class='alert alert-warning' role='alert'>
+                            The link has already expired, you may want to login instead
+                        </div>
+                        <a href="/" class=' btn btn-secondary col-md m-2 ml-3'>
+                            <button type='button' name='back_to_login' style='background-color:transparent;border:0;color:white'>
+                                Back To Login
+                            </button>
+                        </a>
+                      
+                    </div>
+                    <form method='POST' class='forgot-form' style='display:none;'>
+                        <input type='hidden' value="<?php echo $_POST['email_address']; ?>" name='email_address' />
+                        <input type='hidden' value="<?php echo $_POST['reset_key']; ?>" name='reset_key' />
+                        <input type='hidden' value="<?php echo $_POST['username']; ?>" name='username' />
+                         <h5>Reset your password</h5>
+                         <div class='alert alert-info w-100' role='alert'>
+                            Please create a new password that you don't use on any other site.
+                         </div>
+                        <label>New Password:</label>
+                        <input type='password' class='form-control' name='new_password'/>
+                        <label>Confirm Password:</label>
+                        <input type='password' class='form-control' name='confirm_password'/>
+                        <br/>
+                        <br/>
+                        <div class='row'>
+                            <a href="/" class=' btn btn-secondary col-md m-2 ml-3'>
+                                <button type='button' name='back_to_login' style='background-color:transparent;border:0;color:white'>
+                                    Back To Login
+                                </button>
+                            </a>
+                            <button type='submit' name='change_password' class='btn btn-primary col-md m-2 mr-3'>
+                                Change Password
+                            </button>
+                        </div>
+                        
+                    </form>
+                </div>
+               
+
+
+            </div>
+           
+        </div>
+        <script type='text/python'>
+           from forgot_password import ForgotPassword
+           ForgotPassword()
+        </script>
+    </body>
+</html>

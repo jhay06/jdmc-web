@@ -1,0 +1,94 @@
+<style>
+    .calendar{
+        min-height:210px;
+        border:1px solid var(--accent4);
+        overflow: hidden;
+        background-color: var(--accent2);
+        border-radius: 5px;
+    }
+    .calendar .calendar-head{
+        height:40px;
+        background-color: var(--accent3);
+   
+        
+    }
+    .calendar .calendar-head > a{
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        color:white;    
+    }
+    .calendar .calendar-head > a.active{
+        font-size:22px;
+    }
+    .calendar .calendar-body{
+        overflow: hidden;
+        width: 100%
+        
+    }
+    .calendar .calendar-body .calendar-dayname{
+        overflow: hidden;
+        display: flex;
+        flex-direction: row;
+        border-bottom:1px solid var(--accent4);
+        font-size:12px;
+        
+    }
+    .calendar .calendar-dayname > .col-md{
+      
+        width: 50px;
+    }
+   
+    .calendar .calendar-body .calendar-days .col-md{
+        display: flex;
+        justify-content: center ;
+        align-items: center;
+        border:1px solid var(--accent4);
+        height:40px;
+        width: 50px;
+        
+    }
+    .calendar-days .col-md:hover{
+        background-color: var(--accent1);
+        cursor:hand;
+    }
+</style>
+
+<div class='calendar'>
+    <div class='row'>
+        <div class='col-md calendar-head row'>
+            <a class='col-md-3 month'>
+                July
+            </a>
+            <a class='col-md month active'>
+                August 2021
+            </a>
+            <a class='col-md-3 month'>
+                September
+            </a>
+        </div>
+       
+    </div>
+    <div class='calendar-body col-md'>
+        <div class='calendar-dayname row'>
+            <div class='col-md'>
+                Sun</div>
+            <div class='col-md'>Mon</div>
+            <div class='col-md'>Tue</div>
+            <div class='col-md'>Wed</div>
+            <div class='col-md'>Thu</div>
+            <div class='col-md'>Fri</div>
+            <div class='col-md'>Sat</div>
+        </div>
+        <div class='calendar-days'>
+            
+        </div> 
+    </div>
+</div>
+<script type='text/python'>
+    from datetime import datetime
+    from calendar_ui.calendar_control import CalendarControl
+    now=datetime.now()
+    cal=CalendarControl('.calendar',now.month,now.year)
+  
+</script>

@@ -1,0 +1,86 @@
+<form class="form login-form"  action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
+    <div class='title-head'>
+        <img src="static/images/jmdc-logo-small.png"/>
+       
+        <h2><?php echo $GLOBALS['app']->title; ?></h2>
+    </div>
+    <div class='input'>
+
+    <label>USERNAME OR EMAIL ADDRESS</label>
+    <br/>
+    <input type="text" name="username" 
+    placeholder="Username or Email" />
+    <br/>
+    </div>
+    <br/>
+    <div class="input">
+        <label>PASSWORD</label>
+        <br/>
+        <input type="password" name="password"
+        placeholder="Password" />
+    </div>
+   <center>
+    <div class='forgot-con'>
+    <a class='link-left forgot-link' href='#forgot'>Forgot password?</a>
+    </div>
+    <button type='submit' class='full_btn'
+    name='login'>Sign In</button>
+    </center>
+    <div class='not-member-con'>
+        Not yet a member? Sign up <a href='/signup' class='link-left'>here</a>.
+    </div>
+
+</form>
+
+<script type='text/python'>
+    import jquery
+
+    from browser import alert,window,bind,html
+    from browser.widgets.dialog import Dialog,EntryDialog,InfoDialog
+    import json
+    jq=window.jQuery
+    def data_success(res,status,xhr):
+        if status=='success':
+            data=json.loads(res)
+            if data['status']=='success':
+                jq('.login-form')[0].submit()
+            else:
+                alert(data['message'])
+    def data_error(res,status,xhr):
+       alert('Could not connect to the server')
+    def login_click(e):
+        e.preventDefault()
+        username=jq('input[name=username]').val()
+        password=jq('input[name=password]').val()
+        if not username:
+            alert('Please type your username')
+            return False
+        
+        if not password:
+            alert('Please type your password')
+            return False
+        data={"username":username,"password":password,'login':'post'}
+        jq.post('/modules/api_cable/login_cable.php',data,data_success).fail(data_error)
+
+    
+    def forgot_click(e):
+        jq('.forgot-link').off('click')
+        d=Dialog('Forgot your password?',ok_cancel=True)
+        style=dict(textAlign='center',paddingBottom='1em')
+        d.panel <=html.DIV('Your email address: '+html.INPUT(),style=style)
+        @bind(d.cancel_button,'click')
+        def cancel(ev):
+            jq('.brython-dialog-close').off('click')
+            jq('.forgot-link').click(forgot_click)
+        @bind(d.ok_button,'click')
+        def ok(ev):
+            pass
+        def close_btn(ev):
+            jq('.brython-dialog-close').off('click')
+            jq('.forgot-link').click(forgot_click)
+
+        jq('.brython-dialog-close').click(close_btn)
+       
+    jq('button[name=login]').click(login_click)
+    jq('.forgot-link').click(forgot_click)
+</script>

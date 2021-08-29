@@ -1,0 +1,1288 @@
+<style>
+    .container-appointment{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+
+    }
+    .container-appointment .appointment-header{
+        width: 100%;
+        display: flex;
+        height: 30px;
+    }
+    .container-appointment .appointment-header button{
+        width: 80px;
+        background-color: white;
+        font-size:13px;
+        border:1px solid #d8d8d8;
+        padding:2px 10px;
+        margin: 0px 5px;
+    }
+    .container-appointment .appointment-header button:hover{
+        background-color: #e8e8e8;
+    }
+    .container-appointment .appointment-header .month-name{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        width:60%;
+    }
+    .container-appointment .appointment-header .month-name div{
+        margin:0px 5px;
+        color: #4C788F;
+        font-size:12px;
+    }
+    .container-appointment .appointment-header .month-name .active{
+        font-size:20px !important;
+        font-weight: bold !important;
+    }
+    .container-appointment .appointment-header .month-name .month{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin:0px 10px;
+
+    }
+    .container-appointment .appointment-calendar{
+        border:1px solid #4C788F;
+        margin:10px 2px;    
+    }
+    .container-appointment .appointment-calendar .calendar-head{
+        border:1px solid #4C788F;
+        background-color: #4C788F;
+        height:50px;
+        min-width: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color:white;    
+        border:1px solid #989898;
+    }
+    .container-appointment .appointment-calendar .calendar-time{
+        background-color: #C6DBE6;
+        font-size:12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding:2px 0px;
+        height:33px;
+        border:1px solid #e8e8e8;
+    }
+    .container-appointment .appointment-calendar .partition .appointment{
+        border:1px solid #e8e8e8;
+        display: flex;
+        height:33px;
+    }
+    .container-appointment .appointment-calendar .partition .appointment:hover{
+        background-color:#00005330;
+    }
+    .container-appointment .appointment-calendar .partition  .appointment.notavailable{
+        background-color:beige !important;
+    }
+    .container-appointment .calendar-day{
+        font-size:10px;
+        width: 100%;
+        word-spacing: 1em;
+        overflow: hidden;
+        padding: 0;
+        text-align:center;
+        
+
+    }
+    #add_appointment,#show_appointment, .modal-dialog, .modal-content .modal-body{
+        padding:0 !important;
+    }
+    #add_appointment .add_appointment_header, #show_appointment .show_appointment_header{
+        background-color: #4C788F !important;
+        min-height:80px;
+        padding:10px;
+        color:white;
+    }
+    #add_appointment .add_appointment_form{
+        margin:10px;
+        border:1px solid #e8e8e8;
+        border-radius: 5px;
+        min-height: 80px;
+        
+
+    }
+    #add_appointment .timeslothead{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #add_appointment .time-selector{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    #add_appointment .time-selector .form-control{
+        width: 150px !important;
+        margin:0px 10px;
+    }
+    #add_appointment .time-selector label{
+        font-size:18px;
+        font-weight: 400;
+        
+
+    }
+    #show_appointment .content_col{
+        padding:0px 10px;
+    }
+    #show_appointment .show_appointment_content{
+        margin:10px;
+    }
+    #show_appointment .content_child{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border:1px solid #e8e8e8;
+        min-height:20px;
+        vertical-align: middle;
+    }
+</style>
+<div class='modal' id='show_appointment' tabindex="-1" role="dialog">
+    <div class='modal-dialog modal-lg' role='document'>
+        <div class='modal-content'>
+            <div class='show_appointment_header'>
+                <h3 class='branch_name'>Branch Name</h3>
+                <br/>
+                <label>Appointment Form</label>
+                <br/>
+                <label class='date_of_appointment'>Date</label>
+            </div>
+            <div class='show_appointment_content row'>
+                <div class='col-md-6'>
+                    <div class='content_col'>
+                        <div class='row'>
+                            <div class='col-md content_child'>
+                                <label>Reference No:</label>
+                            </div>
+                            <div class='col-md content_child'>
+                                <label class='ref_no'></label>
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md content_child'>
+                                <label>Start Time:</label>
+                            </div>
+                            <div class='col-md content_child'>
+                                <label class='start_time'></label>
+                            </div> 
+                        </div>
+                        <div class='row'>
+                            <div class='col-md content_child'>
+                                <label>End Time:</label>
+                            </div>
+                            <div class='col-md content_child'>
+                                <label class='end_time'></label>
+                            </div>
+                        </div>
+    
+                    </div>
+                </div>
+                <div class='col-md-6'>
+                    <div class='content_col'>
+                        <div class='row'>
+                            <div class='col-md content_child'>
+                                <label>Status</label>
+                            </div>
+                            <div class='col-md content_child'>
+                                <label class='status'></label>
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md content_child'>
+                                <label>Patient's Name:</label>
+                            </div>
+                            <div class='col-md content_child'>
+                                <label class='patient_name'></label>
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md content_child'>
+                                <label>Contact Number:</label>
+                            </div>
+                            <div class='col-md content_child'>
+                                <label class='contact_no'></label>
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-md content_child'>
+                                <label>Email Address</label>
+                            </div>
+                            <div class='col-md content_child'>
+                                <label class='email_address'></label>
+                            </div>
+                        </div>
+    
+                    </div>
+                </div> 
+            </div>
+            <div class='modal-footer'>
+                <button class='btn btn-danger' data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="modal" id='add_appointment' tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+       
+        <div class="modal-body">
+            <div class='add_appointment_header'>
+                <h3 class='branch_name'>Branch Name</h3>
+                <br/>
+                <label>Appointment Form</label>
+                <br/>
+                <label class='date_of_appointment'>Date</label>
+            </div>
+            <div class='add_appointment_form card'>
+                <div class='card-header row timeslothead'>
+                    <div class='col-md-4'>
+                        Time-slot
+                    </div>
+                    <div class='col-md-8 time-selector'>
+                        <label>From:</label>&nbsp;
+                        <select class='form-control' name='choose_from_time'>
+                            <option value='0' item=0>Choose Time</option>
+                            <option value='0600' item=1>06:00 AM</option>
+                            <option value='0700' item=2>07:00 AM</option>
+                            <option value='0800' item=3>08:00 AM</option>
+                            <option value='0900' item=4>09:00 AM</option>
+                            <option value='1000' item=5>10:00 AM</option>
+                            <option value='1100' item=6>11:00 AM</option>
+                            <option value='1200' item=7>12:00 PM</option>
+                            <option value='1300' item=8>01:00 PM</option>
+                            <option value='1400' item=9>02:00 PM</option>
+                            <option value='1500' item=10>03:00 PM</option>
+                            <option value='1600' item=11>04:00 PM</option>
+                            <option value='1700' item=12>05:00 PM</option>
+                            <option value='1800' item=13>06:00 PM</option>
+                            <option value='1900' item=14>07:00 PM</option>
+                            <option value='2000' item=15>08:00 PM</option>
+                            <option value='2100' item=16>09:00 PM</option>
+                            <option value='2200' item=17>10:00 PM</option>
+                        </select>&nbsp;
+                        <label>To:</label>&nbsp;
+                        <select class='form-control' name='choose_to_time'>
+                            <option value='0' item=0>Choose Time</option>
+                            <option value='0600' item=1>06:00 AM</option>
+                            <option value='0700' item=2>07:00 AM</option>
+                            <option value='0800' item=3>08:00 AM</option>
+                            <option value='0900' item=4>09:00 AM</option>
+                            <option value='1000' item=5>10:00 AM</option>
+                            <option value='1100' item=6>11:00 AM</option>
+                            <option value='1200' item=7>12:00 PM</option>
+                            <option value='1300' item=8>01:00 PM</option>
+                            <option value='1400' item=9>02:00 PM</option>
+                            <option value='1500' item=10>03:00 PM</option>
+                            <option value='1600' item=11>04:00 PM</option>
+                            <option value='1700' item=12>05:00 PM</option>
+                            <option value='1800' item=13>06:00 PM</option>
+                            <option value='1900' item=14>07:00 PM</option>
+                            <option value='2000' item=15>08:00 PM</option>
+                            <option value='2100' item=16>09:00 PM</option>
+                            <option value='2200' item=17>10:00 PM</option>
+                        </select>
+                    </div>
+                </div>
+                <div class='card-body'>
+                    <div class='row'>
+                        <div class='col-md-4'>Patient's Name:</div>
+                        <div class='col-md-8'><input type='text' class='form-control' name='patient_name' placeholder="Last Name, First Name"/> </div>
+                    </div>
+                    <br/>
+                    <div class='row'>
+                        <div class='col-md-4'>Contact Number:</div>
+                        <div class='col-md-8'><input type='text' class='form-control' name='contact_no' placeholder="Contact number"/> </div>
+                    </div>
+                    <br/>
+                    <div class='row'>
+                        <div class='col-md-4'>Email Address:</div>
+                        <div class='col-md-8'> <input type='email' class='form-control' name='email_address' placeholder="Email address"/> </div>
+                    </div>
+                    <br/>
+                    <div class='row'>
+                        <div class='col-md-4'>Branch</div>
+                        <div class='col-md-8 branch_name'>Branch 1</div>
+                    </div>
+                    <br/>
+                    <div class='row'>
+                        <div class='col-md-4'>Date of Appointment:</div>
+                        <div class='col-md-8 date_of_appointment'>Date of appointment</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class='modal-footer'>
+            <button class='btn-primary btn' type='submit' name='add_appointment'>Submit</button>
+            <button class='btn btn-danger' type='button' data-dismiss='modal'>Cancel</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<div class='container-appointment'>
+    <div class='appointment-header'>
+        <select class='form-select branch_selector'>
+            <option value='0'>Choose Branch</option>
+        </select>
+        <button class='btn btn-light prev_date_btn' >&lt; Prev</button>
+        <button class='btn btn-light next_date_btn'>Next &gt;</button>
+        <div class='month-name'>
+            <a href='#' class='month prev_month'></a>
+            <a href='#' class='month current_month active'></a>
+            <a href='#' class='month next_month'></a>
+        </div>
+        
+    </div>
+    <div class='appointment-calendar row'>
+        
+        <div class='col-md-2'>
+            <div class='row calendar-head'>
+                <label>Time/Date</label>
+            </div>
+            <div class='row calendar-time'>
+                <label>6:00AM - 7:00AM</label>
+            </div>
+            <div class='row calendar-time'>
+                <label>7:00AM - 8:00AM</label>
+            </div>
+            <div class='row calendar-time'>
+                <label>8:00AM - 9:00AM</label>
+            </div>
+            <div class='row calendar-time'>
+                <label>9:00AM - 10:00AM</label>
+            </div>
+            <div class='row calendar-time'>
+                <label>10:00AM - 11:00AM</label>
+            </div>
+            <div class='row calendar-time'>
+                <label>11:00AM - 12:00PM</label>
+            </div>
+            <div class='row calendar-time'>
+                <label>12:00PM - 1:00PM</label>
+            </div>
+            <div class='row calendar-time'>
+                <label>1:00PM - 2:00PM</label>
+            </div>
+            <div class='row calendar-time'>
+                <label>2:00PM - 3:00PM</label>
+            </div>
+            <div class='row calendar-time'>
+                <label>3:00PM - 4:00PM</label>
+            </div>
+            <div class='row calendar-time'>
+                <label>4:00PM - 5:00PM</label>
+            </div>
+            <div class='row calendar-time'>
+                <label>5:00PM - 6:00PM</label>
+            </div>
+            <div class='row calendar-time'>
+                <label>6:00PM - 7:00PM</label>
+            </div>
+            <div class='row calendar-time'>
+                <label>7:00PM - 8:00PM</label>
+            </div>
+            <div class='row calendar-time'>
+                <label>8:00PM - 9:00PM</label>
+            </div>
+            <div class='row calendar-time'>
+                <label>9:00PM - 10:00PM</label>
+            </div>
+        </div>
+        <div class='col-md partition'>
+            <div class='row dates'>
+                <div class='col-md calendar-head calendar-day day1' >
+            
+                </div>
+                <div class='col-md calendar-head calendar-day day2' >
+                  
+                </div>
+                <div class='col-md calendar-head calendar-day day3' >
+                
+                </div>
+                <div class='col-md calendar-head calendar-day day4' >
+                  
+                </div>
+                <div class='col-md calendar-head calendar-day day5' >
+             
+                </div>
+            </div>
+            <div class='row schedule' from='6:00' to='7:00'  >
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='7:00' to='8:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='8:00' to='9:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='9:00' to='10:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='10:00' to='11:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='11:00' to='12:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='12:00' to='13:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='13:00' to='14:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='14:00' to='15:00' >
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='15:00' to='16:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='16:00' to='17:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='17:00' to='18:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='18:00' to='19:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='19:00' to='20:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='20:00' to='21:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='21:00' to='22:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+
+        </div>
+        <div class='col-md partition' >
+            <div class='row dates'>
+            <div class='col-md calendar-head calendar-day day6'></div>
+            <div class='col-md calendar-head calendar-day day7'></div>
+            <div class='col-md calendar-head calendar-day day8'></div>
+            <div class='col-md calendar-head calendar-day day9'></div>
+            <div class='col-md calendar-head calendar-day day10'></div>
+            </div>
+            <div class='row schedule' from='6:00' to='7:00'  >
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='7:00' to='8:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='8:00' to='9:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='9:00' to='10:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='10:00' to='11:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='11:00' to='12:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='12:00' to='13:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='13:00' to='14:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='14:00' to='15:00' >
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='15:00' to='16:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='16:00' to='17:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='17:00' to='18:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='18:00' to='19:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='19:00' to='20:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='20:00' to='21:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='21:00' to='22:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+
+
+        </div>
+        <div class='col-md partition'>
+            <div class='row dates'>
+            <div class='col-md calendar-head calendar-day day11'></div>
+            <div class='col-md calendar-head calendar-day day12'></div>
+            <div class='col-md calendar-head calendar-day day13'></div>
+            <div class='col-md calendar-head calendar-day day14' ></div>
+            <div class='col-md calendar-head calendar-day day15'></div>
+            </div>
+            <div class='row schedule' from='6:00' to='7:00'  >
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='7:00' to='8:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='8:00' to='9:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='9:00' to='10:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='10:00' to='11:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='11:00' to='12:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='12:00' to='13:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='13:00' to='14:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='14:00' to='15:00' >
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='15:00' to='16:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='16:00' to='17:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='17:00' to='18:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='18:00' to='19:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='19:00' to='20:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='20:00' to='21:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+            <div class='row schedule' from='21:00' to='22:00'>
+                <div class='col-md appointment' index=0>
+            
+                </div>
+                <div class='col-md appointment' index=1>
+                  
+                </div>
+                <div class='col-md appointment' index=2>
+                
+                </div>
+                <div class='col-md appointment' index=3>
+                  
+                </div>
+                <div class='col-md appointment' index=4>
+             
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script type='text/python'>
+    from browser import alert
+    from datetime import datetime
+    from appointment.get_active_appointment import GetActiveAppointment
+    from appointment.appointment_calendar import AppointmentCalendar
+
+    now=datetime.now()
+    appoint=AppointmentCalendar('.container-appointment')
+
+    appoint.load_month(now.month,now.day,now.year,now.weekday())
+    from branch.get_branch import BranchListControl
+    b=BranchListControl('.appointment-header .branch_selector')
+    def result_list(status,message,data):
+        
+        if status==False:
+            alert(message)
+        else:
+            appoint.load_appointment_data(data['data'])
+    get_active=GetActiveAppointment(result_list)
+      
+    def is_change(index,branch):
+        get_active.get_appointment_list_with_range(branch, appoint.from_range, appoint.to_range)
+        try:
+            appoint.chosen_branch(branch)
+        except:
+            appoint.chosen_branch(branch)
+    
+    b.is_changed(is_change)
+    def on_range_change(new_date):
+        appoint.load_month(new_date.month, new_date.day, new_date.year , new_date.weekday())
+        b.trigger_branch()
+    appoint.on_range(on_range_change)
+</script>
