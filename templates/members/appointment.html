@@ -20,6 +20,8 @@
 </style>
 </head>
 <body onload="brython(1)">
+  <?php include_once("templates/artifacts/loading.html"); ?>
+  
   <div id="myNav" class="dash-overlay">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <div class="dash-overlay-content">
@@ -72,9 +74,11 @@
            
         </style>
       
-        <div class="table-responsive setting" style="margin-bottom: 20px; width: 100%; padding-left: 15px;" >
+        <div class="table-responsive appointment" style="margin-bottom: 20px; width: 100%; padding-left: 15px;" >
             <input type='hidden' name='username' value='<?php echo $username; ?>' />
-
+            <?php include_once("templates/artifacts/appointment_calendar.html"); 
+           
+            ?>
          </div>
 </div>
 
@@ -106,8 +110,9 @@ function closeNav() {
 }
 </script>
 <script type="text/python">
-    from change_password import ChangePassword
-    ChangePassword()
+    from utils.loader import Loader
+    loader=Loader()
+    loader.close_loader()
 </script>
 </body>
 </html>

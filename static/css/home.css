@@ -15,31 +15,35 @@ html,body{
     display:table;
 }
 
-#main_theme .login_form{
+ .login_form{
     min-width:380px;
     width:40%;
     display:inline;
-    height:100vh;
+ 
     text-align:left;
     color:#ffffff;
     font-size:12px;
-    position: relative;
     overflow: hidden;
     display:table-cell;
+    vertical-align: top;
 }
-
+.login_form .form-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:80%;
+    flex-direction: column;
+}
 #main_theme .login_form .form{
     width:60%;
     height:50vh;
 
-    position:relative;
-    top:15%;
-    left:20%;
 }
 #main_theme .menu_of_service{
 
     text-align: center;
     display:table-cell;
+    
     width:100%;
     min-width:0px;
     background: linear-gradient(rgba(255, 255, 255, .70), rgba(255, 255, 255, .70)),url("/static/images/dentist-chair.jpg") no-repeat left center fixed;
@@ -52,14 +56,21 @@ html,body{
 
     height:100vh;
 }
-#main_theme .menu_of_service .menu{
-    width:60%;
-    height:50vh;
-    position:relative;
+#main_theme .menu_of_service .menu-container{
     display: flex;
-    flex-wrap: wrap;
-    top: 30%;
-    left:20%;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+
+}
+#main_theme .menu_of_service .menu-container .menu{
+    justify-content: center;
+    align-items: center;
+   
+    line-height: 5em;
+ 
+
+   
 }
 
 #main_theme .menu_of_service .menu .home-icons{

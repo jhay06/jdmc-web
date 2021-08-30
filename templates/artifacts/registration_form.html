@@ -1,4 +1,4 @@
-
+<h3>Create an Account</h3>
 <form name='registration_form' class='login-form form' action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
     <input type='hidden' name='updating' value='<?php echo $is_updating; ?>'/>
     <input type='hidden' name='registration_ok' value='false'/>
@@ -51,11 +51,12 @@
           <input class="form-control" type="text" id="EmailAddress" name="email_address" value="<?php echo $email_address; ?>">
         </div>
       </div>
-    <div class="row button-control" style="padding-top: 30px; padding-bottom: 10px;">
+    <div class="button-control">
       <input type="submit" name='reg' value="Save" class="btn btn-secondary" >&nbsp;
-      <a href="<?php echo $cancel_url; ?>" name='cancel' class="btn btn-secondary" id="btn-cancel">Cancel</a>
+      <a href="#form_global"  data-slide='prev' name='cancel' class="btn btn-light" id="btn-cancel">Cancel</a>
     </div>
   </form>
+
   <script type="text/python">
     import jquery
     

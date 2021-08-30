@@ -1,45 +1,64 @@
+
+
 <form class="form login-form"  action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
     <div class='title-head'>
-        <img src="static/images/jmdc-logo-small.png"/>
-       
-        <h2><?php echo $GLOBALS['app']->title; ?></h2>
+        <h3>Login to Continue</h3>
+
     </div>
+    <br/>
     <div class='input'>
 
     <label>USERNAME OR EMAIL ADDRESS</label>
     <br/>
-    <input type="text" name="username" 
+    <input type="text" class='form-control' name="login_username" 
     placeholder="Username or Email" />
     <br/>
     </div>
-    <br/>
+  
     <div class="input">
         <label>PASSWORD</label>
         <br/>
-        <input type="password" name="password"
+        <input type="password" class='form-control' name="login_password"
         placeholder="Password" />
     </div>
    <center>
     <div class='forgot-con'>
     <a class='link-left forgot-link' href='#forgot'>Forgot password?</a>
     </div>
-    <button type='submit' class='full_btn'
+    <button type='submit' class='full_btn btn btn-secondary w-100'
     name='login'>Sign In</button>
     </center>
     <div class='not-member-con'>
-        Not yet a member? Sign up <a href='/signup' class='link-left'>here</a>.
+       
+            <div class='f-right'>
+                Not yet a member? Sign up
+            </div>&nbsp; &nbsp;
+            <div>
+                <a href='#form_global' data-slide='next'>here.</a>
+       
+            </div>
+  
+      
     </div>
 
 </form>
 
+
 <script type='text/python'>
     import jquery
-
+    from confirm_forgot_password import ConfirmForgotPassword
     from browser import alert,window,bind,html
     from browser.widgets.dialog import Dialog,EntryDialog,InfoDialog
     import json
     jq=window.jQuery
+    confirm_forgot=ConfirmForgotPassword()
+    from utils.loader import Loader
+    loader=Loader()
+    loader.close_loader()   
+
     def data_success(res,status,xhr):
+
+        loader.close_loader()
         if status=='success':
             data=json.loads(res)
             if data['status']=='success':
@@ -48,37 +67,46 @@
                 alert(data['message'])
     def data_error(res,status,xhr):
        alert('Could not connect to the server')
+       loader.close_loader()
     def login_click(e):
+        
         e.preventDefault()
-        username=jq('input[name=username]').val()
-        password=jq('input[name=password]').val()
+        loader.show_loader()
+        username=jq('input[name=login_username]').val()
+        password=jq('input[name=login_password]').val()
         if not username:
             alert('Please type your username')
+            loader.close_loader()
             return False
         
         if not password:
             alert('Please type your password')
+            loader.close_loader()
             return False
         data={"username":username,"password":password,'login':'post'}
         jq.post('/modules/api_cable/login_cable.php',data,data_success).fail(data_error)
-
-    
+    def forgot_done():
+        jq('.brython-dialog-close').trigger('click')
     def forgot_click(e):
         jq('.forgot-link').off('click')
         d=Dialog('Forgot your password?',ok_cancel=True)
         style=dict(textAlign='center',paddingBottom='1em')
-        d.panel <=html.DIV('Your email address: '+html.INPUT(),style=style)
+
+        d.panel <=html.DIV('To forgot your password you need to input your email address below'+html.BR()+'Your email address: '+html.INPUT(name='f_email_address',
+        type='email'
+        ),style=style)
         @bind(d.cancel_button,'click')
         def cancel(ev):
             jq('.brython-dialog-close').off('click')
             jq('.forgot-link').click(forgot_click)
         @bind(d.ok_button,'click')
+
         def ok(ev):
-            pass
+            confirm_forgot.save_changes_click(jq('input[name=f_email_address').val())
         def close_btn(ev):
             jq('.brython-dialog-close').off('click')
             jq('.forgot-link').click(forgot_click)
-
+        confirm_forgot.on_success=forgot_done
         jq('.brython-dialog-close').click(close_btn)
        
     jq('button[name=login]').click(login_click)

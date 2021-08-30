@@ -1,2 +1,0 @@
-# jdmc-web
-JDMC web
