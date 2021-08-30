@@ -1258,7 +1258,8 @@
     from datetime import datetime
     from appointment.get_active_appointment import GetActiveAppointment
     from appointment.appointment_calendar import AppointmentCalendar
-
+    from utils.loader import Loader
+    loader=Loader() 
     now=datetime.now()
     appoint=AppointmentCalendar('.container-appointment')
 
@@ -1271,9 +1272,11 @@
             alert(message)
         else:
             appoint.load_appointment_data(data['data'])
+        loader.close_loader()
     get_active=GetActiveAppointment(result_list)
       
     def is_change(index,branch):
+        loader.show_loader()
         get_active.get_appointment_list_with_range(branch, appoint.from_range, appoint.to_range)
         try:
             appoint.chosen_branch(branch)
@@ -1282,6 +1285,7 @@
     
     b.is_changed(is_change)
     def on_range_change(new_date):
+        
         appoint.load_month(new_date.month, new_date.day, new_date.year , new_date.weekday())
         b.trigger_branch()
     appoint.on_range(on_range_change)
