@@ -1,4 +1,14 @@
 <h3>Create an Account</h3>
+<?php
+if(isset($_POST['registration_ok'])){
+        
+  $registration_ok=$_POST['registration_ok']==='true'?true:false;
+  if($registration_ok){
+      include_once("templates/artifacts/password_prompt.html");
+
+  }
+}
+?>
 <form name='registration_form' class='login-form form' action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
     <input type='hidden' name='updating' value='<?php echo $is_updating; ?>'/>
     <input type='hidden' name='registration_ok' value='false'/>
@@ -59,17 +69,25 @@
 
   <script type="text/python">
     import jquery
-    
     from browser import alert,window
     jq=window.jQuery
     from validations.base_validation import BaseValidation
     import json
+    from utils.loader import Loader
+    loader=Loader() 
+    form=jq('form[name=registration_form]').parent()
+    is_login=False
+    if form.attr('is_login') == 'true':
+      is_login=True
+    
     def registration_connection_failed(res,status,xhr):
       alert('Connection to server not established')
     def registration_connection_ok(res,status,xhr):
       if status=='success':
         result=json.loads(res)
+     
         if result['status'] != 'success':
+          loader.close_loader()
           alert(result['message'])
           return False
     
@@ -78,6 +96,9 @@
           if 'password' in result.keys():
               jq('input[name=generated_password]').val(result['password'])
           jq('form[name=registration_form]').submit()
+          
+      else:
+        loader.close_loader()
     
     
     def reg_click(e,base_validator:BaseValidation=None):
@@ -140,6 +161,7 @@
       data_val['old_employee_no']='<?php echo $employee_no; ?>'
       data_val['is_activated']='<?php echo $is_activated; ?>'
       data_val['date_registered']='<?php echo $date_registered; ?>'
+      loader.show_loader()
       jq.post('<?php echo $cable_url; ?>',data_val,registration_connection_ok).fail(registration_connection_failed)
     
     
@@ -170,5 +192,23 @@
     validators={ "validate":['username','first_name','middle_name','last_name','employee_no'],"validator":"validate"  }
     jq.post("/modules/api_cable/get_validator_cable.php",validators,validator_ready).fail(validator_failed)
     
+    if not is_login:
+      def fade_finish():
+         jq('div[name=prompt').remove()
+      def close_click(e):
+         
+         jq('div[name=prompt]').fadeOut("slow",fade_finish)
+      def submitted(res,status,xhr):
+        parent=jq('form[name=registration_form]').parent()
+        parent.html(res)
+        jq('button[name=close_alert]').click(close_click)
+        loader.close_loader()
+      def submit_registration(e):
+        e.preventDefault()
+        call_url='/controller/signup.php'
+        jq.post(call_url,jq(e.target).serialize(),submitted)
+        
+        
+      jq('form[name=registration_form]').submit(submit_registration)
     
     </script>

@@ -174,8 +174,12 @@
                     <div class='carousel-item active'>
                         <?php include_once('templates/artifacts/login_form.html'); ?>
                     </div>
-                    <div class='carousel-item'>
-                        <?php include_once('templates/artifacts/registration_form.html'); ?>
+                    <div class='carousel-item' is_login='false'>
+                      
+                        <?php
+                        $cable_url="/modules/api_cable/registration_cable.php";
+                          
+                        include_once('templates/artifacts/registration_form.html'); ?>
                     </div>
                 </div>
             </div>

@@ -20,6 +20,8 @@ require("api/mutation/change_password_via_forgot.php");
 require("api/mutation/forgot_password.php");
 require("api/mutation/is_valid_key.php");
 require("api/mutation/add_appointment.php");
+require("api/mutation/cancel_appointment.php");
+require("api/mutation/update_appointment.php");
 /* end of mutation block */
 
 /* this block is for query api */

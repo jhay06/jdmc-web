@@ -25,6 +25,8 @@ use Modules\Constants\AffiliateLevel;
 </style>
 </head>
 <body onload="brython(0)">
+
+  <?php include_once('templates/artifacts/loading.html'); ?>
   <div id="myNav" class="dash-overlay">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <div class="dash-overlay-content">
@@ -156,6 +158,9 @@ function closeNav() {
  from browser import window
  import jquery 
  jq=window.jQuery
+ from utils.loader import Loader
+ loader=Loader()
+ loader.close_loader()
  dataTable=jq('.user_list').DataTable()
  from users.affiliate_level import AffiliateLevel
 

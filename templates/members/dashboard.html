@@ -74,7 +74,7 @@
               overflow: hidden;
               display: flex;
               justify-content: center;
-              align-items: center;
+              height: 100%;
               flex-direction: column;
             }
             .branch-pane{
@@ -147,8 +147,344 @@
               display: flex;
            }
         </style>
+      <style> 
+        .container-appointment{
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+  
+      }
+      .container-appointment .appointment-header{
+          width: 100%;
+          display: flex;
+          height: 30px;
+      }
+      .container-appointment .appointment-header button{
+          width: 80px;
+          background-color: white;
+          font-size:13px;
+          border:1px solid #d8d8d8;
+          padding:2px 10px;
+          margin: 0px 5px;
+      }
+      .container-appointment .appointment-header button:hover{
+          background-color: #e8e8e8;
+      }
+      .container-appointment .appointment-header .month-name{
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          width:60%;
+      }
+      .container-appointment .appointment-header .month-name div{
+          margin:0px 5px;
+          color: #4C788F;
+          font-size:12px;
+      }
+      .container-appointment .appointment-header .month-name .active{
+          font-size:20px !important;
+          font-weight: bold !important;
+      }
+      .container-appointment .appointment-header .month-name .month{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin:0px 10px;
+  
+      }
+      .container-appointment .appointment-calendar{
+          border:1px solid #4C788F;
+          margin:10px 2px;    
+      }
+      .container-appointment .appointment-calendar .calendar-head{
+          border:1px solid #4C788F;
+          background-color: #4C788F;
+          height:50px;
+          min-width: 30px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color:white;    
+          border:1px solid #989898;
+      }
+      .container-appointment .appointment-calendar .calendar-time{
+          background-color: #C6DBE6;
+          font-size:12px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          padding:2px 0px;
+          height:33px;
+          border:1px solid #e8e8e8;
+      }
+      .container-appointment .appointment-calendar .partition .appointment{
+          border:1px solid #e8e8e8;
+          display: flex;
+          height:33px;
+      }
+      .container-appointment .appointment-calendar .partition .appointment:hover{
+          background-color:#00005330;
+      }
+      .container-appointment .appointment-calendar .partition  .appointment.notavailable{
+          background-color:beige !important;
+      }
+      .container-appointment .calendar-day{
+          font-size:10px;
+          width: 100%;
+          word-spacing: 1em;
+          overflow: hidden;
+          padding: 0;
+          text-align:center;
+          
+  
+      }
+      #add_appointment,#show_appointment, .modal-dialog, .modal-content .modal-body{
+          padding:0 !important;
+      }
+      #add_appointment .add_appointment_header, #show_appointment .show_appointment_header{
+          background-color: #4C788F !important;
+          min-height:80px;
+          padding:10px;
+          color:white;
+      }
+      #add_appointment .add_appointment_form{
+          margin:10px;
+          border:1px solid #e8e8e8;
+          border-radius: 5px;
+          min-height: 80px;
+          
+  
+      }
+      #add_appointment .timeslothead{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+      }
+      #add_appointment .time-selector{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+      }
+      #add_appointment .time-selector .form-control{
+          width: 150px !important;
+          margin:0px 10px;
+      }
+      #add_appointment .time-selector label{
+          font-size:18px;
+          font-weight: 400;
+          
+  
+      }
+      #show_appointment .content_col{
+          padding:0px 10px;
+      }
+      #show_appointment .show_appointment_content{
+          margin:10px;
+      }
+      #show_appointment .content_child{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border:1px solid #e8e8e8;
+          min-height:20px;
+          vertical-align: middle;
+      }
+      #appointment_dt .ref_number.sorting{
+        max-width:124px !important;
       
-        <div class="table-responsive dashboard" style="margin-bottom: 20px; width: 100%; padding-left: 15px;" >
+      }
+      #appointment_dt .start_time_th,
+      #appointment_dt .end_time_th{
+         min-width: 60px !important;
+
+      }
+  </style>
+  <div class='modal fade' id='show_appointment' tabindex="-1" role="dialog">
+      <div class='modal-dialog modal-lg' role='document'>
+          <div class='modal-content'>
+              <div class='show_appointment_header'>
+                  <h3 class='branch_name'>Branch Name</h3>
+                  <br/>
+                  <label>Appointment Form</label>
+                  <br/>
+                  <label class='date_of_appointment'>Date</label>
+              </div>
+              <div class='show_appointment_content row'>
+                  <div class='col-md-6'>
+                      <div class='content_col'>
+                          <div class='row'>
+                              <div class='col-md content_child'>
+                                  <label>Reference No:</label>
+                              </div>
+                              <div class='col-md content_child'>
+                                  <label class='ref_no'></label>
+                              </div>
+                          </div>
+                          <div class='row'>
+                              <div class='col-md content_child'>
+                                  <label>Start Time:</label>
+                              </div>
+                              <div class='col-md content_child'>
+                                  <label class='start_time'></label>
+                              </div> 
+                          </div>
+                          <div class='row'>
+                              <div class='col-md content_child'>
+                                  <label>End Time:</label>
+                              </div>
+                              <div class='col-md content_child'>
+                                  <label class='end_time'></label>
+                              </div>
+                          </div>
+      
+                      </div>
+                  </div>
+                  <div class='col-md-6'>
+                      <div class='content_col'>
+                          <div class='row'>
+                              <div class='col-md content_child'>
+                                  <label>Status</label>
+                              </div>
+                              <div class='col-md content_child'>
+                                  <label class='status'></label>
+                              </div>
+                          </div>
+                          <div class='row'>
+                              <div class='col-md content_child'>
+                                  <label>Patient's Name:</label>
+                              </div>
+                              <div class='col-md content_child'>
+                                  <label class='patient_name'></label>
+                              </div>
+                          </div>
+                          <div class='row'>
+                              <div class='col-md content_child'>
+                                  <label>Contact Number:</label>
+                              </div>
+                              <div class='col-md content_child'>
+                                  <label class='contact_no'></label>
+                              </div>
+                          </div>
+                          <div class='row'>
+                              <div class='col-md content_child'>
+                                  <label>Email Address</label>
+                              </div>
+                              <div class='col-md content_child'>
+                                  <label class='email_address'></label>
+                              </div>
+                          </div>
+      
+                      </div>
+                  </div> 
+              </div>
+              <div class='modal-footer'>
+                  <button class='btn btn-danger' data-dismiss="modal">Close</button>
+              </div>
+          </div>
+  
+      </div>
+  </div>
+  <div class="modal fade" id='add_appointment' tabindex="-1" role="dialog">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+         
+          <div class="modal-body">
+              <div class='add_appointment_header'>
+                  <h3 class='branch_name'>Branch Name</h3>
+                  <br/>
+                  <label>Appointment Form</label>
+                  <br/>
+                  <label class='date_of_appointment'>Date</label>
+              </div>
+              <div class='add_appointment_form card'>
+                  <div class='card-header row timeslothead'>
+                      <div class='col-md-4'>
+                          Time-slot
+                      </div>
+                      <div class='col-md-8 time-selector'>
+                          <label>From:</label>&nbsp;
+                          <select class='form-control' name='choose_from_time'>
+                              <option value='0' item=0>Choose Time</option>
+                              <option value='0600' item=1>06:00 AM</option>
+                              <option value='0700' item=2>07:00 AM</option>
+                              <option value='0800' item=3>08:00 AM</option>
+                              <option value='0900' item=4>09:00 AM</option>
+                              <option value='1000' item=5>10:00 AM</option>
+                              <option value='1100' item=6>11:00 AM</option>
+                              <option value='1200' item=7>12:00 PM</option>
+                              <option value='1300' item=8>01:00 PM</option>
+                              <option value='1400' item=9>02:00 PM</option>
+                              <option value='1500' item=10>03:00 PM</option>
+                              <option value='1600' item=11>04:00 PM</option>
+                              <option value='1700' item=12>05:00 PM</option>
+                              <option value='1800' item=13>06:00 PM</option>
+                              <option value='1900' item=14>07:00 PM</option>
+                              <option value='2000' item=15>08:00 PM</option>
+                              <option value='2100' item=16>09:00 PM</option>
+                              <option value='2200' item=17>10:00 PM</option>
+                          </select>&nbsp;
+                          <label>To:</label>&nbsp;
+                          <select class='form-control' name='choose_to_time'>
+                              <option value='0' item=0>Choose Time</option>
+                              <option value='0600' item=1>06:00 AM</option>
+                              <option value='0700' item=2>07:00 AM</option>
+                              <option value='0800' item=3>08:00 AM</option>
+                              <option value='0900' item=4>09:00 AM</option>
+                              <option value='1000' item=5>10:00 AM</option>
+                              <option value='1100' item=6>11:00 AM</option>
+                              <option value='1200' item=7>12:00 PM</option>
+                              <option value='1300' item=8>01:00 PM</option>
+                              <option value='1400' item=9>02:00 PM</option>
+                              <option value='1500' item=10>03:00 PM</option>
+                              <option value='1600' item=11>04:00 PM</option>
+                              <option value='1700' item=12>05:00 PM</option>
+                              <option value='1800' item=13>06:00 PM</option>
+                              <option value='1900' item=14>07:00 PM</option>
+                              <option value='2000' item=15>08:00 PM</option>
+                              <option value='2100' item=16>09:00 PM</option>
+                              <option value='2200' item=17>10:00 PM</option>
+                          </select>
+                      </div>
+                  </div>
+                  <div class='card-body'>
+                      <div class='row'>
+                          <div class='col-md-4'>Patient's Name:</div>
+                          <div class='col-md-8'><input type='text' class='form-control' name='patient_name' placeholder="Last Name, First Name"/> </div>
+                      </div>
+                      <br/>
+                      <div class='row'>
+                          <div class='col-md-4'>Contact Number:</div>
+                          <div class='col-md-8'><input type='text' class='form-control' name='contact_no' placeholder="Contact number"/> </div>
+                      </div>
+                      <br/>
+                      <div class='row'>
+                          <div class='col-md-4'>Email Address:</div>
+                          <div class='col-md-8'> <input type='email' class='form-control' name='email_address' placeholder="Email address"/> </div>
+                      </div>
+                      <br/>
+                      <div class='row'>
+                          <div class='col-md-4'>Branch</div>
+                          <div class='col-md-8 branch_name'>Branch 1</div>
+                      </div>
+                      <br/>
+                      <div class='row'>
+                          <div class='col-md-4'>Date of Appointment:</div>
+                          <div class='col-md-8 date_of_appointment'>Date of appointment</div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class='modal-footer'>
+              <button class='btn-primary btn' type='submit' name='save_appointment'>Save Changes</button>
+              <button class='btn btn-danger' type='button' data-dismiss='modal'>Cancel</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+        <div class="dashboard" style="margin-bottom: 20px; width: 100%; padding-left: 15px;" >
             <div class='content-pane'>
                <div class='left-pane'>
                   <div class='branch-pane row'>
@@ -166,21 +502,21 @@
               <div class='right-pane'>
                   <div class='dash-control col-md row'>
                     <div class='controls'>
-                      <a class='control-link'>
-                        <div >
-                          <span class='fas fa-edit'></span>
+                      <a class='control-link app_action' href='#' action='view' data-target='#show_appointment'>
+                        <div action='view' data-target='#show_appointment'>
+                          <span class='fas fa-eye'></span>
                           View
                         </div>
                       </a>
-                      <a class='control-link'>
-                        <div >
+                      <a class='control-link app_action' href='#' action='update' data-target='#add_appointment'>
+                        <div action='update' data-target='#add_appointment'>
                           <span class='fas fa-edit'></span>
                           Update
                         </div>
                         
                       </a>
-                      <a class='control-link'>
-                        <div>
+                      <a class='control-link app_action' href='#' action='cancel'>
+                        <div action='cancel'>
                           &times;
                           Cancel Reservation
                         </div>
@@ -195,17 +531,17 @@
                     </div>
                     
                   </div>
-                  <div class='reservation-table table-responsive w-100'>
-                    <table id='appointment_dt' class='w-100  table table-hover'>
+                  <div class='reservation-table'>
+                    <table id='appointment_dt' class='w-100 table'>
                         <thead class='thead-dark'>
                           <tr>
                             <th></th>
-                            <th>Reference No</th>
+                            <th class='ref_number'>Reference No</th>
                             <th>Branch</th>
                             <th>Patient</th>
                             <th>Date</th>
-                            <th>Start Time</th>
-                            <th>End Time</th>
+                            <th class='start_time_th'>Start Time</th>
+                            <th class='end_time_th'>End Time</th>
           
                           </tr>
                         
@@ -255,51 +591,137 @@ function closeNav() {
 <script type='text/python'>
   import jquery
   import datatables
+  import json
   from browser import window,alert
+  from datetime import datetime
+  from calendar_ui.calendar_control import CalendarControl
+
   jq=window.jQuery
-  dt=jq('#appointment_dt').DataTable()
+ 
+  my_dt=jq('#appointment_dt').removeAttr('width').DataTable(
+     {
+       "columnDefs":[
+       {'width':30, 'targets':0},
+       {'width':120, "targets":[1]},
+       {'width':50,'targets':2},
+       {'width':90,'targets':[3,4]},
+       {'width':80, 'targets':[5,6]}
+       ]
+     }
+  )
   from branch.get_branch import BranchListControl
   from appointment.get_active_appointment import GetActiveAppointment
   b=BranchListControl('.branches')
+  from appointment.appointment_dashboard import AppointmentDashboard
+  app_dashboard=AppointmentDashboard()
+  
+
+
   from utils.loader import Loader
   loader=Loader()
+  current_calendar=CalendarControl.get_current_calendar()
+  def calendar_change(cal):
+ 
+    b.trigger_branch()
+  
+  
+  current_calendar.on_change(calendar_change)
+  
+  def on_date_click(cal,target,date):
+     global my_dt
+     opt=jq(".branches option:selected")
+     if opt.val() == '0':
+        alert('Please choose a branch first')
+        return
+     col=my_dt.column(4)
+     
+     my_dt.column(4).search(date,True).draw()
+     
+
+  
+  current_calendar.on_date_click(on_date_click)
+
+  def cbx_draw(self,e):
+    app_dashboard.reload_checkbox('.ref_cbx')
+    pass
   def result_list(status,message,data):
-        
+    global my_dt
+
     if status==False:
         alert(message)
     else:
-      jq("#appointment_dt").DataTable().destroy()
+      
+      
+      my_dt.destroy()
+    
+      #jq("#appointment_dt").DataTable().destroy()
       d=data['data']
       list_data=[]
-      print(d)
+      jq('.calendar .date-link').removeClass('active')
       for x in d:
     
         appointment=[]
-        appointment.append('')
+        url_ap="<input type='checkbox' class='ref_cbx' value='{reference_code}' item='{item}'/>".format(reference_code=x['reference_code'],
+          item=json.dumps(x)
+        )
+        appointment.append(url_ap)
         appointment.append(x['reference_code'])
-        print('here')
         appointment.append(x['branch_name'])
-        print('x')
         appointment.append(x['patient_name'])
-        print('year')
-        appointment.append(x['appointment_date'])
-        print('a')
-        appointment.append(x['start_timeslot'])
-        appointment.append(x['end_timeslot'])
+        appointment_date=x['appointment_date']
+        appoint_sp=appointment_date.split(' ')
+        cal_day=jq('.calendar div[date={appoint_day}]'.format(
+          appoint_day=appoint_sp[0]
+        ))
+        cal_day.addClass('active')
+
+        appointment.append(appoint_sp[0])
+        start_slot=x['start_timeslot']
+        end_slot=x['end_timeslot']
+        start_slot=start_slot[0:2]+':'+start_slot[2:4]
+        end_slot=end_slot[0:2]+':'+end_slot[2:4]
+        start_sig=int(start_slot[0:2])
+        end_sig=int(end_slot[0:2])
+        if start_sig >= 12:
+          start_slot=start_slot+' PM'
+        else:
+          start_slot= start_slot+' AM'
+        
+        if end_sig >= 12:
+          end_slot= end_slot+' PM'
+        else:
+          end_slot = end_slot+' AM'
+        
+        appointment.append(start_slot)
+        appointment.append(end_slot)
         list_data.append(appointment)
      
-      jq('#appointment_dt').DataTable({
-        "data":list_data
+      my_dt=jq('#appointment_dt').removeAttr('width').DataTable({
+        "data":list_data,
+        "columnDefs":[
+          {'width':120, "targets":[1]},
+          {'width':50,'targets':2},
+          {'width':90,'targets':[3,4]},
+          {'width':80, 'targets':[5,6]}
+        ]
       })
-      print(jq("#appointment_dt").DataTable())
+      my_dt.on('draw',cbx_draw)
+      my_dt.draw()
       loader.close_loader()
+  
+  
       
        
   get_active=GetActiveAppointment(result_list)  
   def is_change(index,branch):
-    loader.show_loader()
-    get_active.get_appointment_list_with_range(branch, "2021-08-01", "2021-08-31")
     
+    if branch is not None:
+      loader.show_loader()
+      cal_range=current_calendar.get_current_range()
+      
+    else:
+      result_list('success','got list',{'data':[]})
+    get_active.get_appointment_list_with_range(branch, cal_range['from_range'],cal_range['to_range'])
   
   b.is_changed(is_change)
   loader.close_loader()

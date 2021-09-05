@@ -12,6 +12,7 @@
   "get_branches":"query getBranches{  get_branches{  type,message, data{  branch_id, branch_code, branch_name, branch_address, open_time, close_time  } }  }",
   "add_appointment":"mutation addAppointment($input:AddAppointmentInput!){ add_appointment(input:$input){  type,message  } }",
   "get_active_appointment_by_username":"query getActiveAppointmentByUsername($input:GetAppointmentListByUsernameInput!){ get_active_appointment_by_username(input:$input){  type, message, data{  appointment_id, patient_name, patient_contact_no, email_address, branch_code, branch_name, appointment_date, start_timeslot, end_timeslot, appoint_by, is_cancelled, cancelled_date, cancelled_by, reference_code  }    }  }",
-  "get_active_appointment_by_range":"query getActiveAppointmentByRange($input:GetActiveAppointmentByRangeInput!){ get_active_appointment_by_range(input:$input){  type, message, data{  appointment_id, patient_name, patient_contact_no, email_address, branch_code, branch_name, appointment_date, start_timeslot, end_timeslot, appoint_by, is_cancelled, cancelled_date, cancelled_by, reference_code  }    }  }"
-
+  "get_active_appointment_by_range":"query getActiveAppointmentByRange($input:GetActiveAppointmentByRangeInput!){ get_active_appointment_by_range(input:$input){  type, message, data{  appointment_id, patient_name, patient_contact_no, email_address, branch_code, branch_name, appointment_date, start_timeslot, end_timeslot, appoint_by, is_cancelled, cancelled_date, cancelled_by, reference_code  }    }  }",
+  "cancel_appointment":"mutation cancelAppointment($input:CancelAppointmentInput!){ cancel_appointment(input:$input){ type, message  } }",
+  "update_appointment":"mutation updateAppointment($input:UpdateAppointmentInput!){  update_appointment(input:$input){  type, message }  }"
 }

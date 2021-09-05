@@ -5,6 +5,7 @@
         overflow: hidden;
         background-color: var(--accent2);
         border-radius: 5px;
+    
     }
     .calendar .calendar-head{
         height:40px;
@@ -13,13 +14,14 @@
         
     }
     .calendar .calendar-head > a{
-        display: flex;
+        display: flex !important;
         justify-content: center;
         align-items: flex-end;
-        color:white;    
+        color:white;  
+        font-size:12px;  
     }
     .calendar .calendar-head > a.active{
-        font-size:22px;
+        font-size:18px;
     }
     .calendar .calendar-body{
         overflow: hidden;
@@ -52,20 +54,26 @@
         background-color: var(--accent1);
         cursor:hand;
     }
+    .calendar .date-link.active{
+        background-color:beige !important;
+    }
 </style>
 
 <div class='calendar'>
     <div class='row'>
-        <div class='col-md calendar-head row'>
-            <a class='col-md-3 month'>
-                July
-            </a>
-            <a class='col-md month active'>
-                August 2021
-            </a>
-            <a class='col-md-3 month'>
-                September
-            </a>
+        <div class='col-md'>
+            <div class='row calendar-head'>
+                <a class='col-md-3 month prev'>
+               
+                </a>
+                <a class='col-md month active'>
+                    
+                </a>
+                <a class='col-md-3 month next'>
+                    
+                </a>
+            </div>
+           
         </div>
        
     </div>

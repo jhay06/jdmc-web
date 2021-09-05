@@ -34,6 +34,8 @@ if(isset($_GET['action'])){
 </style>
 </head>
 <body onload='brython(1)'>
+
+  <?php include_once('templates/artifacts/loading.html'); ?>
   <div id="myNav" class="dash-overlay">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <div class="dash-overlay-content">
@@ -71,7 +73,7 @@ if(isset($_GET['action'])){
     
         <h4><?php echo $head; ?></h4>
       </div>
-      <div class="container form-appointment">
+      <div class="container form-appointment" is_login='true'>
 
         <?php include_once("templates/artifacts/registration_form.html"); ?>
     </div>
@@ -104,5 +106,12 @@ function closeNav() {
 }
 </script>
 
+
 </body>
+<script type='text/python'>
+  from utils.loader import Loader
+  loader=Loader()
+  loader.close_loader()
+</script>
+
 </html>

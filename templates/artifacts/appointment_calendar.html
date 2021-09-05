@@ -1270,18 +1270,25 @@
         
         if status==False:
             alert(message)
+          
         else:
             appoint.load_appointment_data(data['data'])
         loader.close_loader()
     get_active=GetActiveAppointment(result_list)
       
     def is_change(index,branch):
-        loader.show_loader()
-        get_active.get_appointment_list_with_range(branch, appoint.from_range, appoint.to_range)
-        try:
-            appoint.chosen_branch(branch)
-        except:
-            appoint.chosen_branch(branch)
+        if branch is not None:
+            loader.show_loader()
+        
+            get_active.get_appointment_list_with_range(branch, appoint.from_range, appoint.to_range)
+        
+            try:
+                appoint.chosen_branch(branch)
+            except:
+                appoint.chosen_branch(branch)
+        else:
+            result_list('success','got list',{'data':[]})
+            appoint.chosen_branch(None)
     
     b.is_changed(is_change)
     def on_range_change(new_date):
