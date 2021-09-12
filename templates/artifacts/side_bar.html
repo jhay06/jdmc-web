@@ -13,9 +13,16 @@
           echo '</div>';
         }
         ?>
+        <?php 
+        if($current_user->profile_id == 1){
+
+        ?>
         <div class="container-fluid dash-menu-menu">
-          <a href="/products"><img src="/static/images/products.png" width="20px">&nbsp;&nbsp;&nbsp;Products</a>
+          <a href="/products"><img src="/static/images/products.png" width="20px">&nbsp;&nbsp;&nbsp;Services</a>
         </div>
+        <?php 
+        }
+        ?>
         <?php 
           if($current_user->profile_id == 1){
               echo '<div class="container-fluid dash-menu-menu">';
@@ -26,6 +33,11 @@
           ?>
         <div class="container-fluid dash-menu-menu">
           <a href="/settings"><img src="/static/images/settings.png" width="20px">&nbsp;&nbsp;&nbsp;Settings</a>
+        </div>
+        <div class='container-fluid dash-menu-menu'>
+          <a href='/logout'>
+            <img src='/static/images/logout.png' width="20px">&nbsp;&nbsp;&nbsp;Logout</a>
+          </a>
         </div>
 
   

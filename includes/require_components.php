@@ -22,6 +22,10 @@ require("api/mutation/is_valid_key.php");
 require("api/mutation/add_appointment.php");
 require("api/mutation/cancel_appointment.php");
 require("api/mutation/update_appointment.php");
+require("api/mutation/add_service.php");
+require("api/mutation/delete_service.php");
+require("api/mutation/update_service.php");
+
 /* end of mutation block */
 
 /* this block is for query api */
@@ -31,6 +35,10 @@ require("api/query/get_user_info.php");
 require("api/query/get_branches.php");
 require("api/query/get_active_appointment_by_username.php");
 require("api/query/get_active_appointment_by_range.php");
+require("api/query/get_product_class_list.php");
+require("api/query/get_product_by_id.php");
+require("api/query/get_services.php");
+require("api/query/get_product_by_product_code.php");
 /* end of query block */
 
 ?>

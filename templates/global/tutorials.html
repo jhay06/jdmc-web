@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Tutorials - JMDC Imaging Center</title>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<style type="text/css">
+  .card {
+    height: auto;
+    width: 400px;
+    margin-top: 10px;
+    margin-right: 20px;
+    margin-bottom: 0px;
+    margin-left: 0;
+    float: left;
+    background-color: #C6DBE6; 
+    border: none;
+  }
+  .container-fluid.main-con {
+    background: url("/static/images/official/TUTORIALS.jpg") no-repeat center;
+    background-size: auto 800px;
+  }
+
+     /*
+     .page-container {
+    margin-top: 200px;
+     }*/
+</style>
+
+</head>
+
+<body>
+	<div class="container-fluid banner">
+    <div class="container inner-banner">
+    <div class="row">
+      <div class="col company-logo" style=""><a href="/"><img src="/static/images/jmdc-logo-small.png"></a></div>
+      <div class="col company-name"><h3><a href="/">JMDC<br>Imaging Center</a><h3></div>
+      <div class="col soc-med">
+        <a href="https://facebook.com"><img src="/static/images/fb.png"></a>
+        <a href="https://twitter.com"><img src="/static/images/twitter.png"></a>
+        <a href="https://youtube.com"><img src="/static/images/youtube.png"></a>
+      </div>
+    </div>
+  </div>
+	</div>
+	<div class="container-fluid main-con">
+      <div class="container main-body" style="padding: 0px 0px;">
+    <div class="row">
+    <div class="col title">
+      <h1>TUTORIALS</h1>
+    </div>
+  </div>
+    <div class="container" style="padding: 20px 10px; background-color: rgba(217, 228, 236, .5); width: 100%; margin: 0 auto;">
+      <div class="container-fluid" style="padding: 0px;">
+
+<div id="target-content" class="clearfix products-con" >
+<script type="text/javascript">
+$(document).ready(function(){
+  jQuery("#target-content").load("tutorials-response.php?page=1");
+})
+</script>
+</div>
+
+
+<div class="container-fluid" style="margin-top: 15px; margin-bottom: -10px;">
+  
+</div>
+<script type="text/javascript">
+  jQuery("#pagination li").on('click',function(e){
+ e.preventDefault();
+ jQuery("#target-content").html('loading...');
+ jQuery("#pagination li").removeClass('active');
+ jQuery(this).addClass('active');
+        var pageNum = this.id;
+        jQuery("#target-content").load("tutorials-response.php?page=" + pageNum);
+});
+</script>
+
+    </div>
+</div>
+</div>
+</div>
+<!-- FOOTER -->
+<div class="container-fluid split">
+</div>
+<div class="container-fluid footer">
+  <div class="row">
+    <div class="col-7">
+      JMDC Imaging Center<br>
+      #46 Filipinas Avenue, <br>United Parañaque Subd. 5,<br>Sucat, Paranaque City
+    </div>
+    <div class="col-5 text-right">
+      © 2021. All rights reserved.
+    </div>
+  </div>
+</div>      	
+	
+</body>
+</html>

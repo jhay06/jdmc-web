@@ -29,15 +29,70 @@ body {
 .container-fluid.main-con {
 	height: auto;
 	padding: 0;
-	background-color: var(--primary);
+	/*background-color: var(--primary);*/
 }
 .container-fluid.banner {
-	/*height: 300px;*/
-	height: 250px;
-  	background-image: url("../images/dentist-chair.jpg");
-	background-size: cover;
-	background-position: center;
+	height: 90px;
+  /*background-image: url("../images/3d-imaging.jpg");
+	background-size: auto 1000px;
+	background-repeat: no-repeat;
+	background-color: white;
+	/* background-position: center; */
+	background-color: var(--accent1);
+	background-position: top;
+	/*border-bottom: solid #d5dfe7 5px;*/
+	
 }
+
+.col.company-name {
+    height: 100px;
+    max-width: 70%;
+    padding-top: 18px;
+    padding-left: 0px;
+  }
+  .col.company-name h3 {
+  	line-height: 25px;
+  }
+  .col.company-name a, a:hover {
+  	text-decoration: none;
+  	color: var(--text);
+  }
+  .col.company-logo {
+    height: 100px;
+    max-width: 9%;
+    padding-top: 14px;
+  }
+  .col.company-logo img {
+    width:  60px;
+  }
+  .col.soc-med {
+    max-width: 20%;
+    padding-top: 18px;
+  }
+  .container.inner-banner {
+    width: 71.5%;
+    height: 90px;
+  }
+  .container-fluid.soc-med {
+    display: none;
+  }
+
+.container.main-body {
+  width: 70%; 
+  padding: none;
+  /*margin-bottom: 40px;
+  /*background-color: pink;*/
+  margin-bottom: 0;
+}
+.col.title {
+  padding: 20px;
+  color: var(--accent3);
+  text-align: center;
+  font-family: Arial Black;
+  letter-spacing: 1px;
+}
+
+
 /***** Home Page Images *****/
 .container-fluid.img-con {
 	width: 80%;
@@ -47,6 +102,7 @@ body {
   		transform: translate(-50%, -50%);
   		
   		text-align: center;
+
 }
 .col-sm-3 {
 	max-width: 20%;
@@ -120,17 +176,16 @@ body {
 }
 /***** Footer *****/
 .container-fluid.footer {
-	position: relative;
-	height: auto;
+	height: 120px;
 	background: none;
-	background-color: #4C788F;
-	color: white;
-	padding: 15px;
+	background-color: var(--accent3);
+	color: var(--primary);
 	line-height: 15px;
-	font-weight: 100;
 	font-family: 'Roboto', sans-serif;
 	font-size: .8em;
 	letter-spacing: .7px;
+	padding: 20px 20px;
+
 }
 .container-fluid.split {
 	height: 5px;
@@ -140,9 +195,16 @@ body {
 /***** Login Form *****/
 .container.form-login {
 	position: relative;
-	width:  35%;
+	width:  50%;
 	height: auto;
 	padding: 20px;
+	background-color: blue;
+}
+.col.login-form{
+	width:  50%;
+	height: auto;
+	padding: 20px;
+	background-color: blue;
 }
 /***** Dashboard *****/
 .container-fluid.dash-banner {
@@ -282,6 +344,49 @@ float:left; width: auto; height: 250px; margin-right: 10px; margin-left: 5px; ma
     background-color: #C6DBE6;
 }
 @media only screen and (max-width: 567px) {
+.container.main-body {
+  width: 100%;
+}
+.container-fluid.banner {
+    height: 60px;
+  }
+  .container.inner-banner {
+    width: 100%;
+  }
+  .col.company-name {
+    max-width: 45%;
+    margin-left: 25px;
+    margin-top: 13px;
+    padding-top: 0;
+  }
+  .col.company-name h3 {
+    font-size: 18px;
+    line-height: 16px;
+  }
+  .col.company-logo {
+    height: 100px;
+    max-width: 9%;
+    padding-top: 8px;
+    padding-left: 0;
+  }
+  .col.company-logo img {
+    width:  45px;
+  }
+  .col.soc-med {
+    max-width: 40%;
+    text-align: right;
+    padding-right: 0;
+    padding-left: 0;
+    padding-top: 12px;
+  }
+  .col.soc-med img {
+    width: 35px;
+  }
+
+.col.title {
+  padding-left: 20px;
+  background: none;
+}
 /***** Home Page *****/
 .col-sm-3 {
 	position: relative;
@@ -356,16 +461,16 @@ float:left; width: auto; height: 250px; margin-right: 10px; margin-left: 5px; ma
 }
 .dash-overlay-content {
   position: relative;
-  top: 25%;
+  top: 20%;
   width: 100%;
   text-align: center;
-  margin-top: 30px;
+  margin-top: 0px;
 }
 .dash-overlay a {
   padding: 8px;
   text-decoration: none;
-  font-size: 36px;
-  color: #818181;
+  font-size: 24px;
+  color: var(--text);
   display: block;
   transition: 0.3s;
 }
@@ -374,9 +479,9 @@ float:left; width: auto; height: 250px; margin-right: 10px; margin-left: 5px; ma
 }
 .dash-overlay .closebtn {
   position: absolute;
-  top: 20px;
-  right: 45px;
-  font-size: 60px;
+  top: 10px;
+  right: 25px;
+  font-size: 40px;
 }
 .col.dash-body {
 	max-width: 100%;

@@ -1,0 +1,203 @@
+<?php
+
+    include_once("modules/api_cable/get_product_info.php");
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Services <?php
+    if($product_code !=""){
+        echo "(".$product_code.")";
+    }else{
+        echo "(New Service)";
+    }
+    ?>- JMDC Diagnostic Center</title>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+  <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+  <script src="/static/js/brython.js"></script>
+  <script src="/static/js/brython_stdlib.js"></script>
+<style>
+    .hide{
+        display: none;
+    }
+
+
+</style>
+</head>
+<body onload="brython(0)">
+    <?php include_once("templates/artifacts/loading.html"); ?>
+  
+  <div id="myNav" class="dash-overlay">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <div class="dash-overlay-content">
+    <a href="dashboard.php">Dashboard</a>
+    <a href="appointment.php">Appointment</a>
+    <a href="accreditation.php">Accreditation</a>
+    <a href="services-new.php">Services</a>
+    <a href="registration.php">Registration</a>
+    <a href="tutorials-new.php">Tutorials</a>
+    <a href="settings.php">Settings</a>
+    <a href="logout.php">Logout</a>
+  </div>
+  </div>
+  
+  <div class="container-fluid dash-nav">
+    <div class="row">
+      <div class="col-dash-menu-hamburger">
+        <span style="font-size: 30px; cursor: pointer; color: white;" onclick="openNav()">&#9776;</span>
+      </div>
+      <div class="col dash-banner-sitename">
+        <span class="dash-sitename"><a href="index.html">JMDC DIAGNOSTIC CENTER</a></span>
+      </div>
+      <div class="col dash-banner-user">
+          <a href="#"><img class="avatar" src="/static/images/avatar.jpg"></a>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid dash-main">
+    <div class="row">
+    <div class="col dash-menu">
+      <div class="container-fluid dash-menu-con">
+        <?php include_once("templates/artifacts/side_bar.html"); ?>
+      </div>
+    </div>
+    <div class="col dash-body">
+        
+      <div class="container-fluid pt-3 body-title">
+        <h4>Services <?php 
+                if($product_code !=""){
+                    echo "(".$product_name.")";
+                }else{
+                    echo "(New Service)";
+                }
+           
+            ?></h4>
+      </div>
+      <div class="container-fluid" style="padding-left: 0; font-style: italic;">
+      
+    </div>
+      <div class="container form-appointment">
+  <form action="" method="POST" enctype="multipart/form-data">
+    <input type='hidden' name='service_id' value='<?php echo $service_id; ?>' />
+    <div class="row">
+      <div class="col-25">
+        <label for="prod_code">Product Code</label>
+      </div>
+      <div class="col-75">
+        <input class="form-control" type="text" value="<?php echo $product_code; ?>" id="prod_code" name="prod_code">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="prod_name">Product Name</label>
+      </div>
+      <div class="col-75">
+        <input class="form-control" type="text" id="prod_name" value="<?php echo $product_name; ?>" name="prod_name">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="prod_class">Product Classification</label>
+      </div>
+      <div class="col-75">
+          <?php $default_val=0;
+                if(isset($product_class_id)){
+                    $default_val=$product_class_id;
+                
+                }
+          ?>
+        <select class="form-control" id="prod_class" default_val="<?php echo $default_val; ?>" name="prod_class">
+        
+        
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="prod_desc">Product Description</label>
+      </div>
+      <div class="col-75">
+        <textarea class="form-control" id="prod_desc" name="prod_desc" rows="5"><?php echo $product_description; ?></textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="prod_desc">Product Image</label>
+      </div>
+      <div class="col-75">
+        <?php 
+            $has_file="";
+            if($product_code !=""){
+                $has_file="hide";
+            }
+            if($has_file == "hide"){
+                echo "<div class='has_file'> <label>".$product_image."</label> <button class='change_file'>Change File</button> </div>";
+            }
+
+        ?>
+        <input class="form-control-file <?php echo $has_file; ?>"  type="file" id="prod_img" name="fileToUpload">
+      </div>
+    </div>
+
+
+    <div class="row" style="padding-top: 30px; padding-bottom: 10px;">
+      <button type="button" name='add_service' class="btn btn-secondary" style="">Save</button>&nbsp;
+      <a href="/products" class="btn btn-secondary" id="btn-cancel">Cancel</a>
+     
+    </div>
+  </form>
+</div>
+
+      
+    </div>
+  </div>
+  </div>
+
+<div class="container-fluid split">
+  </div>
+  <div class="container-fluid footer">
+    <div class="row">
+      <div class="col">
+        JMDC - Jagas MedicaDenta Corporation<br>
+        #46 Filipinas Avenue, United Parañaque Subd. 5,<br>Sucat, Paranaque City
+      </div>
+      <div class="col text-right">
+        © 2021. All rights reserved.
+      </div>
+    </div>
+  </div>
+
+<script>
+function openNav() {
+  document.getElementById("myNav").style.width = "100%";
+}
+function closeNav() {
+  document.getElementById("myNav").style.width = "0%";
+}
+</script>
+</body>
+<script type='text/python'>
+    from products.product_new_page import Product
+    prod=Product()
+    <?php 
+    if($product_code !=""){
+        echo "prod.update_product_page()";
+    }else{
+        echo "prod.add_product_page()";
+    }
+   
+
+    ?>
+</script>
+</html>

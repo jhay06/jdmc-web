@@ -7,7 +7,8 @@
 <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <link rel="stylesheet" href="static/css/style.css">
+  <link rel="stylesheet" href="/static/css/datatables.min.css">
+  <link rel="stylesheet" href="/static/css/style.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -16,10 +17,39 @@
   <script src="/static/js/brython.js"></script>
   <script src="/static/js/brython_stdlib.js"></script>
 <style>
+  .title_service{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
+  .action_button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .delete_product{
+    color: #880000;
+    font-size:25px;
+    margin-left:10px;
+  }
+  .div_td{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height:25px;
+  }
+  .div_th{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+ 
 
 </style>
 </head>
 <body onload="brython(1)">
+  <?php include_once("templates/artifacts/loading.html"); ?>
   <div id="myNav" class="dash-overlay">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
   <div class="dash-overlay-content">
@@ -55,27 +85,37 @@
     <div class="col dash-body">
       <div class="container-fluid pt-3 body-title">
         <div class="row">
-          <div class="col" style="max-width: 150px;"><h4>Product</h4></div>
+          <div class="col title_service" style="max-width: 150px;"><h4>Services</h4></div>
+          <a href='/products/new' class='btn btn-secondary' role='button'>+ New
+
+          </a>
         </div>
       </div>
       <div class="container tbl-con" style="width: 100%; padding: 0;">
-        <style>
-            .setting{
-                line-height: 1.5;
-                padding-top:20px;
-                
-            }
-            .setting .row{
-                margin-top:20px;
-                width: 60%;
-            }
-           
-        </style>
+       
       
-        <div class="table-responsive setting" style="margin-bottom: 20px; width: 100%; padding-left: 15px;" >
             <input type='hidden' name='username' value='<?php echo $username; ?>' />
-
-         </div>
+            <div class="table-responsive"  style="margin-bottom: 20px; width: 100%; padding-left: 15px;" >
+              <table class="table table-hover" id='service_dt' style="margin-top: 15px; margin-left: -15px; width: 100%;">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col"><div class='div_th'>#</div></th>
+                    <th scope="col"></th>
+                    <th scope="col"><div class='div_th'>Product Name</div></th>
+                    <th scope="col"><div class='div_th'>Product Code</div></th>
+                    <th scope="col"><div class='div_th'>Classification</div></th>
+           
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  
+        
+                </tbody>
+              </table>
+            </div>
+            
+         
 </div>
 
       
@@ -106,8 +146,9 @@ function closeNav() {
 }
 </script>
 <script type="text/python">
-    from change_password import ChangePassword
-    ChangePassword()
+      from products.product_new_page import Product
+      prod= Product()
+      prod.get_product_list_page()
 </script>
 </body>
 </html>

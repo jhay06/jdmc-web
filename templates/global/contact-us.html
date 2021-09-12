@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Contact Us - JMDC Imaging Center</title>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script>
+ // Initialize and add the map
+ function initMap() {
+  const jmdc = { lat: 14.46536432166638, lng: 121.01732372286502 }; 
+// The map, centered at JMDC
+  const map = new google.maps.Map(document.getElementById("map"), {
+  zoom: 16,
+  center: jmdc,
+});
+  // The marker, positioned at JMDC
+  const marker = new google.maps.Marker({
+  position: jmdc,
+  map: map,
+  });
+}
+</script>
+</head>
+<style>
+  .container-fluid.main-con {
+    background: url("/static/images/official/contact-us.jpg") no-repeat center;
+    background-size: auto 1100px;
+  }
+  .col-sm-6.contact-us-form {
+    padding: 20px;
+    background-color: var(--accent1);
+  }
+  .col-sm-6.contact-info {
+    padding: 80px 80px 0px 80px; 
+    background-color: var(--accent3);
+    color: var(--primary);
+    line-height:  20px;
+  }
+  .container.map {
+    width: 70%;
+    margin-bottom: 40px;
+    margin-top: 40px;
+  }
+  #map {
+    height: 400px;
+    border: solid var(--accent1) 1px;
+  }
+  .label-format {
+    opacity: .6;
+    margin-top: -5px;
+  }
+
+  
+  @media only screen and (max-width: 567px) {
+  .col-sm-6.contact-us-form {
+    background-color: var(--accent1);
+  }
+  .col-sm-6.contact-info {
+    padding: 40px 40px 40px 40px;
+  }
+  .container.map {
+    width: 100%;
+    padding: 0px 35px;
+  }
+  #map {
+    height: 400px;
+  }
+  .row.butt {
+    margin-top: 20px; 
+    margin-bottom: 5px;
+  }
+  
+  /*
+  .container-fluid.soc-med {
+    display: block;
+    height: 50px;
+    background-color: var(--accent2);
+    text-align: center;
+    padding-top: 8px;
+  }*/
+  
+}
+</style>
+<body style="background-color: var(--primary);">
+  <!--<div class="container-fluid soc-med">
+    <img src="images/fb.png" width="35px" style="margin: 0 5px;">
+    <img src="images/twitter.png" width="35px" style="margin: 0 5px;">
+    <img src="images/youtube.png" width="35px" style="margin: 0 5px;">
+  </div>-->
+<div class="container-fluid banner">
+  <div class="container inner-banner">
+    <div class="row">
+      <div class="col company-logo" style=""><a href="/"><img src="/static/images/jmdc-logo-small.png"></a></div>
+      <div class="col company-name"><h3><a href="/">JMDC<br>Imaging Center</a><h3></div>
+      <div class="col soc-med">
+        <a href="https://facebook.com"><img src="/static/images/fb.png"></a>
+        <a href="https://twitter.com"><img src="/static/images/twitter.png"></a>
+        <a href="https://youtube.com"><img src="/static/images/youtube.png"></a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container-fluid main-con">
+  <div class="container main-body">
+    <div class="row">
+    <div class="col title">
+      <h1>CONTACT US</h1>
+    </div>
+  </div>
+    <div class="row">
+    <div class="col-sm-6 contact-us-form">
+      <p>Leave us a message.</p>
+<form action="" method="POST" enctype="multipart/form-data">
+<div class="form-group has-float-label">
+<div class="form-floating mb-3">
+  <input type="text" class="form-control" id="floatingInput" placeholder="Full Name" style="height: 50px;">
+  <label for="floatingInput" class="label-format">Full Name</label>
+</div>
+<div class="form-floating mb-3">
+  <input type="text" class="form-control" id="floatingInput" placeholder="Contact No." style="height: 50px;">
+  <label for="floatingInput" class="label-format">Contact Number</label>
+</div>
+      <div class="form-floating mb-3">
+  <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" style="height: 50px;">
+  <label for="floatingInput" class="label-format">Email address</label>
+</div>
+<div class="form-floating mb-3"> 
+  <textarea class="form-control" id="pat_concern" name="pat_concern" rows="5" placeholder="Message" style=" height:   150px;"></textarea>
+  <label for="floatingInput" class="label-format">Message</label>
+</div>
+<div class="form-floating mb-3">
+   <input type="submit" value="Submit" class="btn btn-secondary" style="height:  50px; width:   100%;">  
+</div>
+</div>
+</form>
+</div>
+<div class="col-sm-6 contact-info">
+  <div class="row" style="padding: 10px;">
+    <div class="col" style="max-width: 80px;">
+      <img src="/static/images/icon-address-35.png">
+    </div>
+    <div class="col">
+      #46 Filipinas Avenue, United Parañaque Subd. 5,
+Sucat, Paranaque City
+    </div>
+  </div>
+  <div class="row" style="padding: 10px;">
+    <div class="col" style="max-width: 80px;">
+      <img src="/static/images/icon-telephone-35.png">
+    </div>
+    <div class="col" style="margin: auto;">
+      987-6543
+    </div>
+  </div>
+  <div class="row" style="padding: 10px;">
+    <div class="col" style="max-width: 80px;">
+      <img src="/static/images/icon-mobile-35.png">
+    </div>
+    <div class="col" style="margin: auto;">
+      0917-1000000
+    </div>
+  </div>
+  <div class="row" style="padding: 10px;">
+    <div class="col" style="max-width: 80px;">
+      <img src="/static/images/icon-email-35.png">
+    </div>
+    <div class="col" style="margin: auto;">
+      info@jmdc.com
+    </div>
+  </div>
+  <div class="row" style="padding: 10px;">
+    <div class="col" style="max-width: 80px;">
+      <img src="/static/images/icon-messenger-35.png">
+    </div>
+    <div class="col" style="margin: auto;">
+      messenger.com/jmdc
+    </div>
+  </div>
+  <div class="row" style="padding: 10px;">
+    <div class="col" style="max-width: 80px;">
+      <img src="/static/images/icon-viber-35.png">
+    </div>
+    <div class="col" style="margin: auto;">
+      0917-1000000
+    </div>
+  </div>
+</div>
+</div>
+</div>
+  <div class="container map">
+    <div class="row">
+        <div class="col" id="map">
+          <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAA3QIss8C2ApKmGkeBvlUs_DXKgB95RdQ&callback=initMap&libraries=&v=weekly" async></script>
+        </div>
+    </div>
+  </div>
+  
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="container-fluid split">
+</div>
+<div class="container-fluid footer">
+  <div class="row">
+    <div class="col-7">
+      JMDC Imaging Center<br>
+      #46 Filipinas Avenue, <br>United Parañaque Subd. 5,<br>Sucat, Paranaque City
+    </div>
+    <div class="col-5 text-right">
+      © 2021. All rights reserved.
+    </div>
+  </div>
+</div>  		
+</body>
+</html>

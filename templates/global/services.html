@@ -1,0 +1,135 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Services Offered - JMDC Imaging Center</title>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src='/static/js/brython.js'></script>
+  <script src='/static/js/brython_stdlib.js'></script>
+  <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<style type="text/css">
+  .card {
+    height: auto;
+    width: 400px;
+    margin-top: 10px;
+    margin-right: 20px;
+    margin-bottom: 0px;
+    margin-left: 0;
+    float: left;
+    background-color: #C6DBE6; 
+    border: none;
+  }
+    .container-fluid.main-con {
+    background: url("/static/images/official/SERVICES.jpg") no-repeat center;
+    background-size: auto 800px;
+  }
+  .col-sm-6.product-body {
+    width:  100%;
+    padding: 20px;
+    /*background-color: var(--accent1);*/
+    background-color: rgba(217, 228, 236, .5);
+    margin: 0 auto;
+    margin-bottom: 0;
+  }
+  .service_card{
+      max-width: 220px;
+  }
+  .service_card .image_container{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding:10px;
+      background:white;
+  }
+</style>
+
+</head>
+
+<body onload='brython(0)'>
+	<div class="container-fluid banner">
+    <div class="container inner-banner">
+    <div class="row">
+      <div class="col company-logo" style=""><a href="/"><img src="/static/images/jmdc-logo-small.png"></a></div>
+      <div class="col company-name"><h3><a href="/">JMDC<br>Imaging Center</a><h3></div>
+      <div class="col soc-med">
+        <a href="https://facebook.com"><img src="/static/images/fb.png"></a>
+        <a href="https://twitter.com"><img src="/static/images/twitter.png"></a>
+        <a href="https://youtube.com"><img src="/static/images/youtube.png"></a>
+      </div>
+    </div>
+  </div>
+	</div>
+	<div class="container-fluid main-con">
+      <div class="container main-body" style="padding: 0px 0px;">
+    <div class="row">
+    <div class="col title">
+      <h1>SERVICES</h1>
+    </div>
+  </div>
+    <div class="container" style="padding: 20px 10px; background-color: rgba(217, 228, 236, .5); width: 100%; margin: 0 auto;">
+      <div class="container-fluid" style="padding: 0px;">
+
+<div id="target-content" class="clearfix products-con" >
+    
+</div>
+
+
+<div class="container-fluid" style="margin-top: 15px; margin-bottom: -10px;">
+  <ul class='pagination' id="pagination" \>
+      <!--
+  <?php if(!empty($total_pages)):for($i=1; $i<=$total_pages; $i++):  
+   if($i == 1):?>
+  <li class='page-item active' id="<?php echo $i;?>"><a href='response.php?page=<?php echo $i;?>' class="page-link"><?php echo $i;?></a></li> 
+  <?php else:?>
+  <li id="<?php echo $i;?>" class="page-item"><a href='response.php?page=<?php echo $i;?>' class="page-link"><?php echo $i;?></a></li>
+  <?php endif;?> 
+  <?php endfor;endif;?> 
+      -->
+  </ul>
+</div>
+<script type="text/javascript">
+  jQuery("#pagination li").on('click',function(e){
+ e.preventDefault();
+ jQuery("#target-content").html('loading...');
+ jQuery("#pagination li").removeClass('active');
+ jQuery(this).addClass('active');
+        var pageNum = this.id;
+        jQuery("#target-content").load("response.php?page=" + pageNum);
+});
+</script>
+
+    </div>
+</div>
+</div>
+</div>
+<!-- FOOTER -->
+<div class="container-fluid split">
+</div>
+<div class="container-fluid footer">
+  <div class="row">
+    <div class="col-7">
+      JMDC Imaging Center<br>
+      #46 Filipinas Avenue, <br>United Parañaque Subd. 5,<br>Sucat, Paranaque City
+    </div>
+    <div class="col-5 text-right">
+      © 2021. All rights reserved.
+    </div>
+  </div>
+</div>      	
+	
+</body>
+<script type='text/python'>
+    from products.get_product_list import GetProductListGallery
+    get_prod=GetProductListGallery("#target-content")
+    get_prod.load()
+</script>
+</html>

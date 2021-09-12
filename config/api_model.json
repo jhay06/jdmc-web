@@ -14,5 +14,13 @@
   "get_active_appointment_by_username":"query getActiveAppointmentByUsername($input:GetAppointmentListByUsernameInput!){ get_active_appointment_by_username(input:$input){  type, message, data{  appointment_id, patient_name, patient_contact_no, email_address, branch_code, branch_name, appointment_date, start_timeslot, end_timeslot, appoint_by, is_cancelled, cancelled_date, cancelled_by, reference_code  }    }  }",
   "get_active_appointment_by_range":"query getActiveAppointmentByRange($input:GetActiveAppointmentByRangeInput!){ get_active_appointment_by_range(input:$input){  type, message, data{  appointment_id, patient_name, patient_contact_no, email_address, branch_code, branch_name, appointment_date, start_timeslot, end_timeslot, appoint_by, is_cancelled, cancelled_date, cancelled_by, reference_code  }    }  }",
   "cancel_appointment":"mutation cancelAppointment($input:CancelAppointmentInput!){ cancel_appointment(input:$input){ type, message  } }",
-  "update_appointment":"mutation updateAppointment($input:UpdateAppointmentInput!){  update_appointment(input:$input){  type, message }  }"
+  "update_appointment":"mutation updateAppointment($input:UpdateAppointmentInput!){  update_appointment(input:$input){  type, message }  }",
+  "get_product_class_list":"query{ get_product_class_list{ type, message, data{  class_id, class_code, class_name }  } }",
+  "add_service":"mutation addService($input:AddServiceInput!){ add_service(input:$input){ type,message } }",
+  "get_services":"query {get_services{ type, message, data{ service_id, product_code, product_name, class_id, class_code, class_name, image_id,file_content, file_content_type} }}",
+  "delete_service":"mutation deleteService($input:DeleteServiceInput!){  delete_service(input:$input){ type, message  } }" ,
+  "update_service":"mutation updateService($input:UpdateServiceInput!){ update_service(input:$input) {  type,message }  }" , 
+  "get_product_by_id":"query getProductbyId($input:GetProductByIdInput!){ get_product_by_id(input:$input){ type, message, data{ service_id, file_content, product_code, product_name, class_id, class_code, class_name, product_description, image_id, file_type, file_name, file_size, file_content_type, file_content  } } }",
+  "get_product_by_product_code":"query getProductbyProductCode($input:GetProductByProductCodeInput!){ get_product_by_product_code(input:$input){ type, message, data{ service_id, file_content, product_code, product_name, class_id, class_code, class_name, product_description, image_id, file_type, file_name, file_size, file_content_type, file_content  } } }"
+
 }
