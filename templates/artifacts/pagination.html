@@ -1,0 +1,111 @@
+<style>
+    .pagination-container{
+        width: 100%;
+        min-height:30px;
+        padding:0px;
+        margin: 0px;;
+    }
+    .pagination-body{
+        display: flex;
+        justify-content: start;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    .pagination-page{
+        border:1px solid #e8e8e8;
+        background-color: white;
+        text-decoration: none;
+        width: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    
+    }
+    .pagination-page.rad-left{
+        border-radius: 5px 0px 0px 5px;
+    }
+    .pagination-page.rad-right{
+        border-radius: 0px 5px 5px 0px;
+    }
+    .pagination-page .pagination-count{
+        margin-top:5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    a.pagination-page:hover{
+        background-color: #d8d8d8;
+    }
+    a.pagination-page.active{
+        background-color: #0d6efd;
+        border:1px solid #0d6efd;
+    }
+    a.pagination-page.active .pagination-count label{
+        color:white;
+    }
+    .pagination-count label{
+        font-weight: 500;
+    }
+</style>
+<div class='pagination-container'>
+    <div class='pagination-body'>
+        <?php
+            if(isset($_GET['page'])){
+                $total_count=intval($_GET['total_count']);
+                $current_page=intval($_GET['page']);
+                $limit= intval($_GET['limit']);
+                $total_page=1;
+
+                if($total_count > $limit){
+                    
+                    $total_page=ceil( $total_count/$limit);
+                }
+
+                if($current_page == 0){
+                    $current_page+=1;
+                }
+                $start=$current_page-1;
+                if($total_page > 1){
+                    $page=0;
+                    while($page < $total_page){
+                        $class="pagination-page";
+                        
+                        if($page ==0){
+                            $class = $class." rad-left";
+                        }else if($page == ($total_page -1)){
+                            $class= $class." rad-right";
+                        }
+                        if($current_page == ($page+1)){
+                            $class = $class." active";
+                        }
+                        ?>
+                        <a href='#' page='<?php echo $page+1; ?>' class='<?php echo $class; ?>'>
+                            <div page="<?php echo $page+1; ?>" class='pagination-count'>
+                                <label page="<?php echo $page+1; ?>"><?php echo $page+1 ?></label>
+                            </div>
+                        </a>
+
+                        <?php
+                        $page++;
+
+                    }
+                }else{
+                    ?>
+                    <a href='#' page='<?php echo $page+1; ?>' class='pagination-page rad-left active'>
+                        <div page="<?php echo $page+1; ?>" class='pagination-count'>
+                            <label page="<?php echo $page+1; ?>">1</label>
+                        </div>
+                    </a>
+
+                    <?php
+                }
+
+            }
+
+        ?>
+
+
+       
+    </div>
+</div>

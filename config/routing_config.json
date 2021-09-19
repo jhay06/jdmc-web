@@ -12,8 +12,13 @@
         "/accreditation/new":"controller/accreditation-new.php",
         "/registration/new":"controller/registration-new.php",
         "/contact-us":"templates/global/contact-us.html",
-        "/tutorials":"templates/global/tutorials.html",
+        "/tutorials":"controller/tutorials.php",
+        "/tutorials/new":"controller/tutorials-new.php",
+        "/tutorials/watch/(.*)":"templates/global/tutorial_watch.html?tutorial=$1",
+        "/tutorials/(.*)/edit":"controller/tutorials-new.php?tutorial=$1",
+        "/video/card":"templates/artifacts/video_card.html",
         "/services":"controller/services.php",
+        "/services/(.*)":"templates/global/services_info.html?product=$1",
         "/service/card":"templates/artifacts/services_card.html",
         "/logout":"controller/logout.php",
         "/about-us":"templates/global/about-us.html",
@@ -22,7 +27,8 @@
         "/products/(.*)/edit":"controller/product-new.php?action=edit&product=$1",
         "/settings":"controller/settings.php",
         "/error/[0-9]":"templates/error/$1.html",
-        "/forgot_password":"controller/forgot.php"
+        "/forgot_password":"controller/forgot.php",
+        "/pagination":"templates/artifacts/pagination.html"
     },
     "error":{
         "404":"/error/404",

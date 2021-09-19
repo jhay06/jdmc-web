@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Services Offered - JMDC Imaging Center</title>
+<title>Tutorial- JMDC Imaging Center</title>
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
 <meta charset="utf-8">
@@ -17,40 +17,45 @@
   <!-- CSS only -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <style type="text/css">
-  .card {
-    height: auto;
-    width: 400px;
-    margin-top: 10px;
-    margin-right: 20px;
-    margin-bottom: 0px;
-    margin-left: 0;
-    float: left;
-    background-color: #C6DBE6; 
-    border: none;
-  }
-    .container-fluid.main-con {
-    background: url("/static/images/official/SERVICES.jpg") no-repeat center;
-    background-size: auto 800px;
-  }
-  .col-sm-6.product-body {
-    width:  100%;
-    padding: 20px;
-    /*background-color: var(--accent1);*/
-    background-color: rgba(217, 228, 236, .5);
-    margin: 0 auto;
-    margin-bottom: 0;
-  }
-  .service_card{
-      max-width: 220px;
-      height: 214px;
-  }
-  .service_card .image_container{
-      display: flex;
+    .col-sm-6.product-body {
+        width:  100%;
+        padding: 20px;
+        background-color: var(--accent1);
+        margin: 0 auto;
+      }
+      .col-sm-6.product-body p {
+        margin-left: 20px;
+        margin-top: 0px;
+      }
+      .col-sm-6.product-body img {
+        margin-right: 20px;
+      }
+      .vid-embed {
+        width: 100%;
+        height: 600px;
+      }
+      @media only screen and (max-width: 567px) {
+      .col-sm-6.product-body {
+        background-color: var(--accent1);
+      }
+      .col-sm-6.product-body p {
+        margin-left:  0px;
+      }
+      .col-sm-6.product-body img {
+        margin-right: 0px;
+        margin-left: 0px;
+      }
+      .vid-embed {
+        width: 100%;
+        height: 250px;
+      }
+    }
+  .video_embed{
+      display: flex !important;
       justify-content: center;
       align-items: center;
-      padding:10px;
-      height:120px;
-      background:white;
+      flex-direction: column;
+      height:250px;
   }
 </style>
 
@@ -75,20 +80,26 @@
       <div class="container main-body" style="padding: 0px 0px;">
     <div class="row">
     <div class="col title">
-      <h1>SERVICES</h1>
+      <h1>Tutorial</h1>
     </div>
   </div>
     <div class="container" style="padding: 20px 10px; background-color: rgba(217, 228, 236, .5); width: 100%; margin: 0 auto;">
       <div class="container-fluid" style="padding: 0px;">
 
-<div id="target-content" class="clearfix products-con" >
+<div id="target-content" youtube_id="<?php echo $_GET['tutorial']; ?>" class="clearfix products-con" >
+   
+    
+    <div class="row product-body">
+          <h4 id='video_title'></h4>
+          <iframe class="vid-embed" id="vid_embed" src="">
+    </iframe>
+          
+    
+    </div>
     
 </div>
 
 
-<div class="container-fluid" id='pagination-loader' style="margin-top: 15px; margin-bottom: -10px;">
-
-</div>
 <script type="text/javascript">
   jQuery("#pagination li").on('click',function(e){
  e.preventDefault();
@@ -121,9 +132,23 @@
 	
 </body>
 <script type='text/python'>
-    from products.get_product_list import GetProductListGallery
-    get_prod=GetProductListGallery("#target-content","#pagination-loader")
-    get_prod.load()
+from tutorials.get_tutorial_info import GetTutorialInfo
+import jquery
+from browser import window
+from utils.loader import Loader
+jq=window.jQuery
+loader= Loader()
+def page_load(e):
+    youtube_id=jq("#target-content")
+    
+    tutorial_info=GetTutorialInfo(youtube_id.attr('youtube_id'))
+    tutorial_info.set_video_title_element("#video_title")
+    tutorial_info.set_youtube_link_element("#vid_embed")
+
+    tutorial_info.start_load()
+    loader.close_loader()
+jq('document').ready(page_load)
+
     
 </script>
 </html>

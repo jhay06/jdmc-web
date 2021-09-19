@@ -26,6 +26,30 @@ if(isset($_GET['product'])){
         }   
       
     }
+}else{
+    if(isset($_POST['get_product'])){
+        $product_code=$_POST['product_code'];
+        $args=array();
+        if(!$product_code){
+            $args['status']='failed';
+            $args['message']='Missing product code';
+        }else{
+            $api=new APIGetProductByProductCode();
+            $api->product_code=$product_code;
+            $var= $api->process();
+            if($api->is_error()){
+                $args['status']='error';
+                $args['message']='Unknown error, Please try again';
+            }else{
+                $res=$api->get_result();
+                $args['status']=$res['type'];
+                $args['message']=$res['message'];
+                $args['data']=$res['data'];
+            }
+
+        }
+        echo json_encode($args);
+    }
 }
 
 ?>

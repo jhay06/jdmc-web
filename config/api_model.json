@@ -17,10 +17,15 @@
   "update_appointment":"mutation updateAppointment($input:UpdateAppointmentInput!){  update_appointment(input:$input){  type, message }  }",
   "get_product_class_list":"query{ get_product_class_list{ type, message, data{  class_id, class_code, class_name }  } }",
   "add_service":"mutation addService($input:AddServiceInput!){ add_service(input:$input){ type,message } }",
-  "get_services":"query {get_services{ type, message, data{ service_id, product_code, product_name, class_id, class_code, class_name, image_id,file_content, file_content_type} }}",
+  "get_services":"query getServices($pagination:PaginationInput){get_services(pagination:$pagination){ type, message, data{ service_id, product_code, product_name, class_id, class_code, class_name, image_id,file_content, file_content_type}, pagination{ current_page,total_count} }}",
   "delete_service":"mutation deleteService($input:DeleteServiceInput!){  delete_service(input:$input){ type, message  } }" ,
   "update_service":"mutation updateService($input:UpdateServiceInput!){ update_service(input:$input) {  type,message }  }" , 
   "get_product_by_id":"query getProductbyId($input:GetProductByIdInput!){ get_product_by_id(input:$input){ type, message, data{ service_id, file_content, product_code, product_name, class_id, class_code, class_name, product_description, image_id, file_type, file_name, file_size, file_content_type, file_content  } } }",
-  "get_product_by_product_code":"query getProductbyProductCode($input:GetProductByProductCodeInput!){ get_product_by_product_code(input:$input){ type, message, data{ service_id, file_content, product_code, product_name, class_id, class_code, class_name, product_description, image_id, file_type, file_name, file_size, file_content_type, file_content  } } }"
-
+  "get_product_by_product_code":"query getProductbyProductCode($input:GetProductByProductCodeInput!){ get_product_by_product_code(input:$input){ type, message, data{ service_id, file_content, product_code, product_name, class_id, class_code, class_name, product_description, image_id, file_type, file_name, file_size, file_content_type, file_content  } } }",
+  "add_tutorial":"mutation addTutorial($input:AddTutorialInput!){ add_tutorial(input:$input){ type, message }}",
+  "get_tutorial_list":"query getTutorialList($pagination:PaginationInput){ get_tutorial_list(pagination:$pagination){  type, message , data{ video_id, youtube_id, video_title, youtube_link ,  video_description  },pagination{ current_page, total_count }  } }",
+  "get_tutorial_info":"query getTutorialInfo($input:GetTutorialInfoInput!){  get_tutorial_info( input:$input ){ type, message, data{ video_id, youtube_id, video_title, youtube_link, video_description } }}",
+  "update_tutorial":"mutation updateTutorial($input:UpdateTutorialInput!){ update_tutorial(input:$input){ type,message }  }",
+  "delete_tutorial":"mutation deleteTutorial($input:DeleteTutorialInput!){ delete_tutorial( input:$input){ type,message} }",
+  "submit_feedback":"mutation submitFeedback($input:SubmitFeedbackInput!){ submit_feedback( input:$input){ type,message } }"
 }

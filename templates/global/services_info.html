@@ -75,20 +75,25 @@
       <div class="container main-body" style="padding: 0px 0px;">
     <div class="row">
     <div class="col title">
-      <h1>SERVICES</h1>
+      <h1 id='product_name'></h1>
     </div>
   </div>
     <div class="container" style="padding: 20px 10px; background-color: rgba(217, 228, 236, .5); width: 100%; margin: 0 auto;">
       <div class="container-fluid" style="padding: 0px;">
 
-<div id="target-content" class="clearfix products-con" >
+<div id="target-content" product_code="<?php echo $_GET['product']; ?>" class="clearfix products-con" >
     
+        <div class="row">
+        
+        <div class="col-sm-6 product-body">
+          <img class="prod-info-img" id='product_image'  />
+          <p id='product_description'></p>
+        </div>
+    
+    </div>
 </div>
 
 
-<div class="container-fluid" id='pagination-loader' style="margin-top: 15px; margin-bottom: -10px;">
-
-</div>
 <script type="text/javascript">
   jQuery("#pagination li").on('click',function(e){
  e.preventDefault();
@@ -121,9 +126,23 @@
 	
 </body>
 <script type='text/python'>
-    from products.get_product_list import GetProductListGallery
-    get_prod=GetProductListGallery("#target-content","#pagination-loader")
-    get_prod.load()
+from products.get_product_info import GetProductInfo
+from utils.loader import Loader
+import jquery
+from browser import window
+jq=window.jQuery
+loader=Loader()
+def page_load(e):
+    product_name=jq("#target-content")
+    
+    product_info=GetProductInfo(product_name.attr('product_code'))
+    product_info.set_image_element("#product_image")
+    product_info.set_product_label_element("#product_name")
+    product_info.set_product_description_element("#product_description")
+    product_info.start_load()
+    loader.close_loader()
+jq('document').ready(page_load)
+
     
 </script>
 </html>

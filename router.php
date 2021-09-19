@@ -80,7 +80,7 @@ class Router{
                              fclose($file);
                              if($query !=null){
                                 $_parser=parse_str($query,$output);
-                                foreach($_parser as $key=>$value){
+                                foreach($query as $key=>$value){
                                     $_GET[$key]=$value;
                                 }
                             }

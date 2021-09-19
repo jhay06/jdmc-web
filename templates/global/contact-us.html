@@ -11,6 +11,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="/static/js/brython.js"></script>
+  <script src="/static/js/brython_stdlib.js"></script>
   <!-- CSS only -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script>
@@ -90,12 +92,13 @@
   
 }
 </style>
-<body style="background-color: var(--primary);">
+<body onload="brython(0)" style="background-color: var(--primary);">
   <!--<div class="container-fluid soc-med">
     <img src="images/fb.png" width="35px" style="margin: 0 5px;">
     <img src="images/twitter.png" width="35px" style="margin: 0 5px;">
     <img src="images/youtube.png" width="35px" style="margin: 0 5px;">
   </div>-->
+  <?php include_once("templates/artifacts/loading.html"); ?>
 <div class="container-fluid banner">
   <div class="container inner-banner">
     <div class="row">
@@ -122,23 +125,23 @@
 <form action="" method="POST" enctype="multipart/form-data">
 <div class="form-group has-float-label">
 <div class="form-floating mb-3">
-  <input type="text" class="form-control" id="floatingInput" placeholder="Full Name" style="height: 50px;">
+  <input type="text" name="full_name" class="form-control" id="floatingInput" placeholder="Full Name" style="height: 50px;">
   <label for="floatingInput" class="label-format">Full Name</label>
 </div>
 <div class="form-floating mb-3">
-  <input type="text" class="form-control" id="floatingInput" placeholder="Contact No." style="height: 50px;">
+  <input type="text" name="contact_no" class="form-control" id="floatingInput" placeholder="Contact No." style="height: 50px;">
   <label for="floatingInput" class="label-format">Contact Number</label>
 </div>
       <div class="form-floating mb-3">
-  <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" style="height: 50px;">
+  <input type="email" name="email_address" class="form-control" id="floatingInput" placeholder="name@example.com" style="height: 50px;">
   <label for="floatingInput" class="label-format">Email address</label>
 </div>
 <div class="form-floating mb-3"> 
-  <textarea class="form-control" id="pat_concern" name="pat_concern" rows="5" placeholder="Message" style=" height:   150px;"></textarea>
+  <textarea class="form-control" id="pat_concern" name="message" rows="5" placeholder="Message" style=" height:   150px;"></textarea>
   <label for="floatingInput" class="label-format">Message</label>
 </div>
 <div class="form-floating mb-3">
-   <input type="submit" value="Submit" class="btn btn-secondary" style="height:  50px; width:   100%;">  
+   <input type="submit" value="Submit" name="submit_feedback" class="btn btn-secondary" style="height:  50px; width:   100%;">  
 </div>
 </div>
 </form>
@@ -223,4 +226,8 @@ Sucat, Paranaque City
   </div>
 </div>  		
 </body>
+<script type='text/python'>
+  from feedback.submit_feedback import SubmitFeedback
+  feedback=SubmitFeedback()
+</script>
 </html>

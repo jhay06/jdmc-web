@@ -9,7 +9,7 @@ class ApiModel{
         $this->model_file=$model_file;
     }
 
-    function get_request_model($input){
+    function get_request_model($input,$pagination=null){
         if($this->model_file !=null){
             try{
                 $path="config/".$this->model_file;
@@ -20,16 +20,19 @@ class ApiModel{
                 $query= new \stdClass();
                 $variable = new \stdClass();
                 $variable->input=$input;
+                if($pagination !=null){
+                    $variable->pagination=$pagination;
+                }
                 $query->query=$model->{$this->model};
                 $query->variables=$variable;
                 $obj=(object) array_filter((array) $query);
                 return $obj;
 
-            }catch(Exception $ex){
-                throw new Exception("Invalid model file");
+            }catch(\Exception $ex){
+                throw new \Exception("Invalid model file");
             }
         }else{
-            throw new Exception("Please set model file");
+            throw new \Exception("Please set model file");
         }
     }
 

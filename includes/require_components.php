@@ -25,7 +25,10 @@ require("api/mutation/update_appointment.php");
 require("api/mutation/add_service.php");
 require("api/mutation/delete_service.php");
 require("api/mutation/update_service.php");
-
+require("api/mutation/add_tutorial.php");
+require("api/mutation/update_tutorial.php");
+require("api/mutation/delete_tutorial.php");
+require("api/mutation/submit_feedback.php");
 /* end of mutation block */
 
 /* this block is for query api */
@@ -39,6 +42,8 @@ require("api/query/get_product_class_list.php");
 require("api/query/get_product_by_id.php");
 require("api/query/get_services.php");
 require("api/query/get_product_by_product_code.php");
+require("api/query/get_tutorial_list.php");
+require("api/query/get_tutorial_info.php");
 /* end of query block */
 
 ?>

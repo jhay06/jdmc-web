@@ -1,0 +1,176 @@
+<?php
+
+    include_once("modules/api_cable/get_tutorial_info_cable.php");
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Tutorials <?php
+   if($youtube_id !=""){
+        echo "(".$youtube_id.")";
+    }else{
+        echo "(New Tutorial)";
+    }
+    ?>- JMDC Diagnostic Center</title>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+  <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+  <script src="/static/js/brython.js"></script>
+  <script src="/static/js/brython_stdlib.js"></script>
+<style>
+    .hide{
+        display: none;
+    }
+
+
+</style>
+</head>
+<body onload="brython(0)">
+    <?php include_once("templates/artifacts/loading.html"); ?>
+  
+  <div id="myNav" class="dash-overlay">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <div class="dash-overlay-content">
+    <a href="dashboard.php">Dashboard</a>
+    <a href="appointment.php">Appointment</a>
+    <a href="accreditation.php">Accreditation</a>
+    <a href="services-new.php">Services</a>
+    <a href="registration.php">Registration</a>
+    <a href="tutorials-new.php">Tutorials</a>
+    <a href="settings.php">Settings</a>
+    <a href="logout.php">Logout</a>
+  </div>
+  </div>
+  
+  <div class="container-fluid dash-nav">
+    <div class="row">
+      <div class="col-dash-menu-hamburger">
+        <span style="font-size: 30px; cursor: pointer; color: white;" onclick="openNav()">&#9776;</span>
+      </div>
+      <div class="col dash-banner-sitename">
+        <span class="dash-sitename"><a href="index.html">JMDC DIAGNOSTIC CENTER</a></span>
+      </div>
+      <div class="col dash-banner-user">
+          <a href="#"><img class="avatar" src="/static/images/avatar.jpg"></a>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid dash-main">
+    <div class="row">
+    <div class="col dash-menu">
+      <div class="container-fluid dash-menu-con">
+        <?php include_once("templates/artifacts/side_bar.html"); ?>
+      </div>
+    </div>
+    <div class="col dash-body">
+        
+      <div class="container-fluid pt-3 body-title">
+        <h4>Tutorials <?php 
+                if($youtube_id !=""){
+                    echo "(".$youtube_id.")";
+                }else{
+                    echo "(New Tutorial)";
+                }
+           
+            ?></h4>
+      </div>
+      <div class="container-fluid" style="padding-left: 0; font-style: italic;">
+      
+    </div>
+      <div class="container form-appointment">
+        <form action="#" method="POST">
+            <input type='hidden' name='video_id' value="<?php echo $video_id; ?>">
+            
+            <div class="row">
+              <div class="col-25">
+                <label for="id">Youtube ID</label>
+              </div>
+              <div class="col-75">
+                <input class="form-control" type="text" id="id" value="<?php echo $youtube_id; ?>" name="youtube_id">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-25">
+                <label for="title">Title</label>
+              </div>
+              <div class="col-75">
+                <input class="form-control" type="text" id="title" value="<?php echo $video_title; ?>" name="video_title">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-25">
+                <label for="link">Youtube Link</label>
+              </div>
+              <div class="col-75">
+                <input class="form-control" type="text" id="link" value="<?php echo $youtube_link; ?>" name="youtube_link">
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-25">
+                <label for="description">Video Description</label>
+              </div>
+              <div class="col-75">
+                <textarea class="form-control" id="description" name="video_description" rows="5"><?php echo $video_description; ?></textarea>
+              </div>
+            </div>
+        
+            <div class="row" style="padding-top: 30px; padding-bottom: 10px;">
+              <input type="submit" name="add_tutorial" value="Save" class="btn btn-secondary" style="">&nbsp;
+              <a href="/tutorials" class="btn btn-secondary" id="btn-cancel">Cancel</a>
+             
+            </div>
+          </form>
+</div>
+
+      
+    </div>
+  </div>
+  </div>
+
+<div class="container-fluid split">
+  </div>
+  <div class="container-fluid footer">
+    <div class="row">
+      <div class="col">
+        JMDC - Jagas MedicaDenta Corporation<br>
+        #46 Filipinas Avenue, United Parañaque Subd. 5,<br>Sucat, Paranaque City
+      </div>
+      <div class="col text-right">
+        © 2021. All rights reserved.
+      </div>
+    </div>
+  </div>
+
+<script>
+function openNav() {
+  document.getElementById("myNav").style.width = "100%";
+}
+function closeNav() {
+  document.getElementById("myNav").style.width = "0%";
+}
+</script>
+</body>
+<script type='text/python'>
+    from tutorials.tutorial_controller import TutorialController
+    tut=TutorialController()
+    <?php 
+    if($youtube_id !=""){
+        echo "tut.update_tutorial_page()";
+    }else{
+        echo "tut.add_tutorial_page()";
+    }
+   
+
+    ?>
+</script>
+</html>

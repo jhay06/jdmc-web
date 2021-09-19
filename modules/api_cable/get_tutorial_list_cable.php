@@ -1,7 +1,7 @@
 <?php
-    use API\Query\APIGetServices;
-    if(isset($_POST['get_services'])){
-        $api=new APIGetServices();
+    use API\Query\APIGetTutorialList;
+    if(isset($_POST['get_tutorial'])){
+        $api=new APIGetTutorialList();
         $has_pagination=false;
         if(!$_POST['has_pagination']){
             $has_pagination=false;
