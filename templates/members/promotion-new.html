@@ -1,0 +1,225 @@
+
+<?php
+use API\Query\APIGetPromotionByImageId;
+$image_id= "";
+$promotion_id=0;
+$promotion_description= "";
+$promotion_name = "";
+$promotion_status ="";
+$promotion_image= "";
+if(isset($_GET['action'])){
+  if($_GET['action'] == 'edit'){
+    $promotion = $_GET['promotion'];
+    $api = new APIGetPromotionByImageId();
+    $api->image_id = $promotion;
+    $var = $api->process();
+    if($api->is_error()){
+        
+    }else{
+        $res = $api->get_result();
+        if($res['type'] == 'success'){
+            $data = $res['data'];
+            $promotion_description = $data['description'];
+            $promotion_image = $data['file_name'];
+            $promotion_name = $data['promotion_name'];
+            $promotion_id = $data['promotion_id'];
+            $image_id = $data['image_id'];
+            $promotion_status = $data['status'];
+        }
+    }
+  }
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Promotions <?php
+    if($image_id !=""){
+        echo "(".$image_id."))";
+    }else{
+        echo "(New Promotions)";
+    }
+    ?>- JMDC Diagnostic Center</title>
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="/static/css/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://unpkg.com/gijgo@1.9.13/js/gijgo.min.js" type="text/javascript"></script>
+  <link href="https://unpkg.com/gijgo@1.9.13/css/gijgo.min.css" rel="stylesheet" type="text/css" />
+  <script src="/static/js/brython.js"></script>
+  <script src="/static/js/brython_stdlib.js"></script>
+<style>
+    .hide{
+        display: none;
+    }
+
+
+</style>
+</head>
+<body onload="brython(0)">
+    <?php include_once("templates/artifacts/loading.html"); ?>
+  
+  <div id="myNav" class="dash-overlay">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <div class="dash-overlay-content">
+    <a href="dashboard.php">Dashboard</a>
+    <a href="appointment.php">Appointment</a>
+    <a href="accreditation.php">Accreditation</a>
+    <a href="services-new.php">Services</a>
+    <a href="registration.php">Registration</a>
+    <a href="tutorials-new.php">Tutorials</a>
+    <a href="settings.php">Settings</a>
+    <a href="logout.php">Logout</a>
+  </div>
+  </div>
+  
+  <div class="container-fluid dash-nav">
+    <div class="row">
+      <div class="col-dash-menu-hamburger">
+        <span style="font-size: 30px; cursor: pointer; color: white;" onclick="openNav()">&#9776;</span>
+      </div>
+      <div class="col dash-banner-sitename">
+        <span class="dash-sitename"><a href="index.html">JMDC DIAGNOSTIC CENTER</a></span>
+      </div>
+      <div class="col dash-banner-user">
+          <a href="#"><img class="avatar" src="/static/images/avatar.jpg"></a>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid dash-main">
+    <div class="row">
+    <div class="col dash-menu">
+      <div class="container-fluid dash-menu-con">
+        <?php include_once("templates/artifacts/side_bar.html"); ?>
+      </div>
+    </div>
+    <div class="col dash-body">
+        
+      <div class="container-fluid pt-3 body-title">
+        <h4>Promotions <?php 
+                if($image_id !=""){
+                    echo "(".$image_id.")";
+                }else{
+                    echo "(New Promotions)";
+                }
+           
+            ?></h4>
+      </div>
+      <div class="container-fluid" style="padding-left: 0; font-style: italic;">
+      
+    </div>
+      <div class="container form-appointment">
+  <form action="" method="POST" enctype="multipart/form-data">
+    <input type='hidden' name='promotion_id' value='<?php echo $promotion_id; ?>' />
+    <input type='hidden' name='image_id' value='<?php echo $image_id; ?>' />
+    <div class="row">
+      <div class="col-25">
+        <label for="promotion_name">Promotion Name</label>
+      </div>
+      <div class="col-75">
+        <input class="form-control" type="text"  id="promotion_name" name="promotion_name" value="<?php echo $promotion_name; ?>">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="promotion_description">Description</label>
+      </div>
+      <div class="col-75">
+        <input class="form-control" type="text" id="promotion_description" name="promotion_description" value='<?php echo $promotion_description; ?>'>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-25">
+        <label for="promotion_status">Status</label>
+      </div>
+      <div class="col-75">
+         
+        <select class="form-control" id="promotion_status" name="promotion_status">
+        
+            <option value='0'>Please select</option>
+            
+            <option value='1' 
+            <?php if($promotion_status =='Active'){ echo "selected";  } ?> 
+            >Active</option>
+            <option value='2' <?php if($promotion_status =='Inactive'){  echo "selected"; } ?> >Inactive</option>
+        </select>
+      </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-25">
+        <label for="prod_desc">Promotion Image</label>
+      </div>
+      <div class="col-75">
+        <?php 
+            $has_file="";
+            if($image_id!=""){
+                $has_file="hide";
+            }
+            if($has_file == "hide"){
+                echo "<div class='has_file'> <label>".$promotion_image."</label> <button class='change_file'>Change File</button> </div>";
+            }
+
+        ?>
+        <input class="form-control-file <?php echo $has_file; ?>"  type="file" id="promotion_img" name="fileToUpload">
+      </div>
+    </div>
+
+
+    <div class="row" style="padding-top: 30px; padding-bottom: 10px;">
+      <button type="button" name='add_promotion' class="btn btn-secondary" style="">Save</button>&nbsp;
+      <a href="/promotions" class="btn btn-secondary" id="btn-cancel">Cancel</a>
+     
+    </div>
+  </form>
+</div>
+
+      
+    </div>
+  </div>
+  </div>
+
+<div class="container-fluid split">
+  </div>
+  <div class="container-fluid footer">
+    <div class="row">
+      <div class="col">
+        JMDC - Jagas MedicaDenta Corporation<br>
+        #46 Filipinas Avenue, United Parañaque Subd. 5,<br>Sucat, Paranaque City
+      </div>
+      <div class="col text-right">
+        © 2021. All rights reserved.
+      </div>
+    </div>
+  </div>
+
+<script>
+function openNav() {
+  document.getElementById("myNav").style.width = "100%";
+}
+function closeNav() {
+  document.getElementById("myNav").style.width = "0%";
+}
+</script>
+</body>
+<script type='text/python'>
+    #from utils.loader import Loader
+    #Loader().close_loader()
+    from promotion.promotion_new_page import Promotion
+    prom = Promotion()
+    <?php 
+    if($image_id !=""){
+        echo "prom.update_promotion_page()";
+    }else{
+        echo "prom.add_promotion_page()";
+    }
+   
+
+    ?>
+</script>
+</html>

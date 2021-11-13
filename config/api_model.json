@@ -27,5 +27,11 @@
   "get_tutorial_info":"query getTutorialInfo($input:GetTutorialInfoInput!){  get_tutorial_info( input:$input ){ type, message, data{ video_id, youtube_id, video_title, youtube_link, video_description } }}",
   "update_tutorial":"mutation updateTutorial($input:UpdateTutorialInput!){ update_tutorial(input:$input){ type,message }  }",
   "delete_tutorial":"mutation deleteTutorial($input:DeleteTutorialInput!){ delete_tutorial( input:$input){ type,message} }",
-  "submit_feedback":"mutation submitFeedback($input:SubmitFeedbackInput!){ submit_feedback( input:$input){ type,message } }"
+  "submit_feedback":"mutation submitFeedback($input:SubmitFeedbackInput!){ submit_feedback( input:$input){ type,message } }",
+  "add_promotion":"mutation addPromotion($input:AddPromotionInput!){ add_promotion(input:$input){ type, message} }",
+  "update_promotion":"mutation updatePromotion($input:UpdatePromotionInput!){ update_promotion(input:$input ){type, message}}",
+  "delete_promotion":"mutation deletePromotion($input:DeletePromotionInput!){ delete_promotion(input:$input){ type, message} }",
+  "get_promotion_list":"query{ get_promotion_list{  type,message,  data{ promotion_id, promotion_name, image_id, description, status, file_id, file_type, file_name, file_size, file_content_type , file_content  } }}",
+  "get_promotion_by_id":"query getPromtionById($input:GetPromotionByIdInput!){ get_promotion_by_id(input:$input){ type, message ,data{ promotion_id , promotion_name, image_id, description, status , file_id, file_type , file_name , file_size ,file_content_type, file_content }} }",
+  "get_promotion_by_image_id":"query getPromtionById($input:GetPromotionByImageIdInput!){ get_promotion_by_image_id(input:$input){ type, message ,data{ promotion_id , promotion_name, image_id, description, status , file_id, file_type , file_name , file_size ,file_content_type, file_content }} }"
 }

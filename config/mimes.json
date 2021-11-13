@@ -32,6 +32,10 @@
         "mime":"image/gif",
         "route":false
     },
+    ".svg":{
+        "mime":"image/svg+xml",
+        "route":false
+    },
     ".txt":{
         "mime":"text/plain",
         "route":false

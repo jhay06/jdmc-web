@@ -343,10 +343,12 @@ float:left; width: auto; height: 250px; margin-right: 10px; margin-left: 5px; ma
 .table tbody tr:hover td, .table tbody tr:hover th {
     background-color: #C6DBE6;
 }
+
 @media only screen and (max-width: 567px) {
 .container.main-body {
   width: 100%;
 }
+
 .container-fluid.banner {
     height: 60px;
   }

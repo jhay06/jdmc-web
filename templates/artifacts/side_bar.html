@@ -1,15 +1,17 @@
 <?php $current_user=$GLOBALS['_user']; ?>
+<?php $location= $_SERVER['PHP_SELF']; ?>
   <div class="container-fluid dash-menu-menu">
-          <a href="/dashboard"><img src="/static/images/dashboard.png" width="20px">&nbsp;&nbsp;&nbsp;Dashboard</a>
+          <a href="/dashboard" <?php if($location == '/dashboard'){  echo "class=active"; }  ?>  ><img src="/static/images/dashboard.png" width="20px">&nbsp;&nbsp;&nbsp;Dashboard</a>
         </div>
         <hr>
         <div class="container-fluid dash-menu-menu">
-          <a href="/appointment"><img src="/static/images/appointment.png" width="20px">&nbsp;&nbsp;&nbsp;Appointment</a>
+          <a href="/appointment"  <?php if($location == '/appointment'){  echo "class=active"; }  ?> ><img src="/static/images/appointment.png" width="20px">&nbsp;&nbsp;&nbsp;Appointment</a>
         </div>
         <?php
         if($current_user->profile_id !=3){
           echo '<div class="container-fluid dash-menu-menu">';
-          echo '<a href="/accreditation" class="active"><img src="/static/images/accreditation.png" width="20px">&nbsp;&nbsp;&nbsp;Accreditation</a>';
+          ?><a href="/accreditation"  <?php if($location == '/accreditation'){  echo "class=active"; }  ?> ><img src="/static/images/accreditation.png" width="20px">&nbsp;&nbsp;&nbsp;Accreditation</a>
+          <?php
           echo '</div>';
         }
         ?>
@@ -18,7 +20,7 @@
 
         ?>
         <div class="container-fluid dash-menu-menu">
-          <a href="/products"><img src="/static/images/products.png" width="20px">&nbsp;&nbsp;&nbsp;Services</a>
+          <a href="/products"  <?php if($location == '/products'){  echo "class=active"; }  ?> ><img src="/static/images/products.png" width="20px">&nbsp;&nbsp;&nbsp;Services</a>
         </div>
         <?php 
         }
@@ -26,7 +28,8 @@
         <?php 
           if($current_user->profile_id == 1){
               echo '<div class="container-fluid dash-menu-menu">';
-              echo '<a href="/registration"><img src="/static/images/registration.png" width="20px">&nbsp;&nbsp;&nbsp;Registration</a>';
+              ?> <a href="/registration"  <?php if($location == '/registration'){  echo "class=active"; }  ?> ><img src="/static/images/registration.png" width="20px">&nbsp;&nbsp;&nbsp;Registration</a>
+              <?php
               echo '</div>';
       
           }
@@ -34,17 +37,20 @@
         <?php
           if($current_user->profile_id == 1){
             ?>
+        <div class='container-fluid dash-menu-menu'>
+          <a href='/promotions'  <?php if($location == '/promotions'){  echo "class=active"; }  ?>><img src='/static/images/bullhorn.svg' width="20px"/>&nbsp;&nbsp;&nbsp;Promotions</a>
+        </div>
         <div class="container-fluid dash-menu-menu">
-            <a href="/tutorials" class="active"><img src="/static/images/tutorials.png" width="20px">&nbsp;&nbsp;&nbsp;Tutorials</a>
+            <a href="/tutorials"  <?php if($location == '/tutorials'){  echo "class=active"; }  ?> ><img src="/static/images/tutorials.png" width="20px">&nbsp;&nbsp;&nbsp;Tutorials</a>
         </div>
         <?php
         }
         ?>
         <div class="container-fluid dash-menu-menu">
-          <a href="/settings"><img src="/static/images/settings.png" width="20px">&nbsp;&nbsp;&nbsp;Settings</a>
+          <a href="/settings"  <?php if($location == '/settings'){  echo "class=active"; }  ?>><img src="/static/images/settings.png" width="20px">&nbsp;&nbsp;&nbsp;Settings</a>
         </div>
         <div class='container-fluid dash-menu-menu'>
-          <a href='/logout'>
+          <a href='/logout' >
             <img src='/static/images/logout.png' width="20px">&nbsp;&nbsp;&nbsp;Logout</a>
           </a>
         </div>

@@ -1,3 +1,7 @@
+<?php
+use API\Query\APIGetPromotionList;
+
+?>
 <html lang="en"><head>
     <title>Home - Jagas MedicaDenta Corporation</title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -55,6 +59,52 @@
         .col.home-icons a {
             text-decoration: none;
             color: var(--text);
+        }
+        .promotion_slideshow_container{
+          position:absolute;
+          left:0;
+          top:0;
+          width: 100%;
+          height:100vh;
+          overflow: hidden;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background-color: #ffffff80;
+        }
+        
+        .promotion_carousel{
+          width: 80%;
+          height: 80%;
+          background-color: #333333;
+          
+        }
+        
+        .promotion_close{
+          position: relative;
+          right:0px;
+          top:-10px;
+          left:98.5%;
+          background-color: #C6DBE6;
+          width: 30px;
+          height:30px;
+          border-radius: 30px ;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .promotion_close a{
+          text-decoration: none;
+          color:#880000;
+          font-size:18px;
+        }
+        .promotion_item_container{
+          width: 100%;
+          height:90%;
+          overflow: hidden;
+        }
+        .hidden{
+          display: none;
         }
     
     .sidenav {
@@ -365,8 +415,69 @@
             fjs.parentNode.insertBefore(js, fjs);
           }(document, 'script', 'facebook-jssdk'));
         </script>
+        <?php
+          $api = new APIGetPromotionList();
+          $var = $api->process();
+          $has_promotions = false;
+          $promo = array();
+          if($api->is_error() == false){
+             $res = $api->get_result();
+             if($res['type'] == 'success'){
+                $promo_data = $res['data'];
+                if(count($promo_data) > 0){
+                  $has_promotions= true;
+                  for($i=0; $i < count($promo_data); $i++){
+                    if($promo_data[$i]['status'] == 'Active'){
+                      array_push($promo,$promo_data[$i]);
+                    }
+                  }
+                }
+             }
+          }
+          
+        ?>
+
+
+        <div class='promotion_slideshow_container <?php  if($has_promotions==false){ echo "hidden"; }  ?>'>
+          <div class='promotion_carousel'>
+            <div class='promotion_close'><a class='promotion_close_btn' href=''>&times;</a></div>
+                <div class='promotion_item_container'>
+                  <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner" id='promotion_inner' style='height:100%' >
+                      <?php
+                        if($has_promotions){
+                          for($i=0; $i < count($promo); $i++){
+                            $current = $promo[$i];
+                            $img_data = "data:".$current['file_content_type'].";base64, ".$current['file_content'];
+
+                            ?>
+                              <div class='carousel-item <?php if($i == 0){ echo active; } ?> '>
+                                  <img class='d-block w-100' src='<?php echo $img_data; ?>'/>
+                              </div>
+                            <?php
+                          }
+                        }
+                      ?>
+                    </div>
+                    <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </div>
+                </div>
+          </div>
+        </div>
     
-    
+       <script>
+          $(".promotion_close_btn").click(function(e){
+            e.preventDefault();
+            $(".promotion_slideshow_container").addClass('hidden');
+          });
+       </script>
     </body>
     
     
