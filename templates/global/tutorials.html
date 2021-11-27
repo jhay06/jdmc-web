@@ -28,9 +28,9 @@
     background-color: #C6DBE6; 
     border: none;
   }
-  .container-fluid.main-con {
+ /*.container-fluid.main-con */ body {
     background: url("/static/images/official/TUTORIALS.jpg") no-repeat center;
-    background-size: auto 800px;
+    background-size: cover; 
   }
   .col-sm-6.product-body {
     width:  100%;
@@ -62,16 +62,27 @@
 </head>
 
 <body onload="brython(0)">
+  <div class="col soc-med">
+    <div class='soc-med-feed'>
+      <?php include_once("templates/artifacts/soc_med.html"); ?>
+    </div>
+ 
+</div>
 	<div class="container-fluid banner">
     <div class="container inner-banner">
     <div class="row">
-      <div class="col company-logo" style=""><a href="/"><img src="/static/images/jmdc-logo-small.png"></a></div>
-      <div class="col company-name"><h3><a href="/">JMDC<br>Imaging Center</a><h3></div>
-      <div class="col soc-med">
-        <a href="https://facebook.com"><img src="/static/images/fb.png"></a>
-        <a href="https://twitter.com"><img src="/static/images/twitter.png"></a>
-        <a href="https://youtube.com"><img src="/static/images/youtube.png"></a>
+      <div class="col company-logo" style=""><a href="/"><img src="/static/images/jmdc-logo.png"></a></div>
+      <!--<div class="col company-name"><h3><a href="/">JMDC<br>Imaging Center</a><h3></div>-->
+      <!--
+
+         <div class="col soc-med">
+          <div class='soc-med-feed'>
+            <?php include_once("templates/artifacts/soc_med.html"); ?>
+          </div>
+       
       </div>
+      -->
+     
     </div>
   </div>
 	</div>
@@ -115,21 +126,7 @@ $(document).ready(function(){
 </div>
 </div>
 </div>
-<!-- FOOTER -->
-<div class="container-fluid split">
-</div>
-<div class="container-fluid footer">
-  <div class="row">
-    <div class="col-7">
-      JMDC Imaging Center<br>
-      #46 Filipinas Avenue, <br>United Parañaque Subd. 5,<br>Sucat, Paranaque City
-    </div>
-    <div class="col-5 text-right">
-      © 2021. All rights reserved.
-    </div>
-  </div>
-</div>      	
-	
+
 </body>
 
 <script type="text/python">

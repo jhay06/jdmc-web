@@ -33,9 +33,9 @@
 </script>
 </head>
 <style>
-  .container-fluid.main-con {
-    background: url("/static/images/official/contact-us.jpg") no-repeat center;
-    background-size: auto 1100px;
+  /*.container-fluid.main-con*/ body {
+    background: url("/static/images/official/contact-us.jpg")  center;
+    background-size: cover;
   }
   .col-sm-6.contact-us-form {
     padding: 20px;
@@ -93,6 +93,12 @@
 }
 </style>
 <body onload="brython(0)" style="background-color: var(--primary);">
+  <div class="col soc-med">
+    <div class='soc-med-feed'>
+      <?php include_once("templates/artifacts/soc_med.html"); ?>
+    </div>
+ 
+</div>
   <!--<div class="container-fluid soc-med">
     <img src="images/fb.png" width="35px" style="margin: 0 5px;">
     <img src="images/twitter.png" width="35px" style="margin: 0 5px;">
@@ -102,13 +108,9 @@
 <div class="container-fluid banner">
   <div class="container inner-banner">
     <div class="row">
-      <div class="col company-logo" style=""><a href="/"><img src="/static/images/jmdc-logo-small.png"></a></div>
-      <div class="col company-name"><h3><a href="/">JMDC<br>Imaging Center</a><h3></div>
-      <div class="col soc-med">
-        <a href="https://facebook.com"><img src="/static/images/fb.png"></a>
-        <a href="https://twitter.com"><img src="/static/images/twitter.png"></a>
-        <a href="https://youtube.com"><img src="/static/images/youtube.png"></a>
-      </div>
+      <div class="col company-logo" style=""><a href="/"><img src="/static/images/jmdc-logo.png"></a></div>
+      <!--<div class="col company-name"><h3><a href="/">JMDC<br>Imaging Center</a><h3></div> -->
+        
     </div>
   </div>
 </div>
@@ -211,20 +213,7 @@ Sucat, Paranaque City
 
 </div>
 
-<!-- FOOTER -->
-<div class="container-fluid split">
-</div>
-<div class="container-fluid footer">
-  <div class="row">
-    <div class="col-7">
-      JMDC Imaging Center<br>
-      #46 Filipinas Avenue, <br>United Parañaque Subd. 5,<br>Sucat, Paranaque City
-    </div>
-    <div class="col-5 text-right">
-      © 2021. All rights reserved.
-    </div>
-  </div>
-</div>  		
+		
 </body>
 <script type='text/python'>
   from feedback.submit_feedback import SubmitFeedback

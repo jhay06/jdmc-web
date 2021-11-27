@@ -10,6 +10,9 @@ if(isset($_POST['accreditation_save'])){
     $contact_no=$_POST['contact_number'];
     $email_address=$_POST['email_address'];
     $affiliate_level=intval($_POST['affiliate_level']);
+    $is_active= intval($_POST['is_active']);
+    
+  
     $arr=array();
     if(!$username){
         $arr['status']='failed';
@@ -35,6 +38,10 @@ if(isset($_POST['accreditation_save'])){
     }else if($affiliate_level == -1){
         $arr['status']='failed';
         $arr['message']='Invalid affiliate level';
+    }else if($is_active == -1){
+        $arr['status'] = 'failed';
+        $arr['message']='Invalid status';
+        
     }else{
         $pass=new PasswordGenerator();
         $api_reg->username=$username;
@@ -46,6 +53,7 @@ if(isset($_POST['accreditation_save'])){
         $api_reg->is_accreditation=true;
         $api_reg->affiliate_level=$affiliate_level;
         $api_reg->password=$pass->generate(8);
+        $api_reg->is_active = $is_active === 1?true:false;
         $res=$api_reg->process();
         if($api_reg->is_error()==false){
             $result=$api_reg->get_result();

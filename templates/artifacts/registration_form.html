@@ -154,7 +154,7 @@ if(isset($_POST['registration_ok'])){
       if email_address_err:
         alert(email_address_err)
         return False
-      data_val={'username':username_val,'employee_no':employee_no_val,'first_name':first_name_val,'middle_name':middle_name_val,'last_name':last_name_val,'reg':'ok'}
+      data_val={'username':username_val,'employee_no':employee_no_val,'first_name':first_name_val,'middle_name':middle_name_val,'last_name':last_name_val,'is_active':1,'reg':'ok'}
       data_val['email_address']=email_address_val
       data_val['level']='staff'
       data_val['old_username']='<?php echo $username; ?>'

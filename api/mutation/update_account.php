@@ -19,6 +19,7 @@ class APIUpdateAccount extends BaseInput{
     public $contact_no;
     public $date_registered;
     public $is_activated;
+    public $is_active;
     function __construct(){
         parent::__construct("update_account");
     }

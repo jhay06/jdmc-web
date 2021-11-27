@@ -15,6 +15,7 @@ class APIRegister extends BaseInput{
     public $email_address;
     public $contact_number;
     public $password;
+    public $is_active;
     function __construct(){
         parent::__construct("register");
     }

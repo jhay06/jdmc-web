@@ -137,6 +137,19 @@ if(isset($_GET['action'])){
         </select>
       </div>
     </div>
+    <div class='row'>
+      <div class='col-25'>
+        <label for='accreditation_status'>Status: </label>
+
+      </div>
+      <div class='col-75'>
+        <select class='form-control' id='accreditation_status' name='accreditation_status'>
+          
+          <option value='1' <?php if($is_active){ echo "selected"; } ?>  >Active</option>
+          <option value='0' <?php if($is_active==false){ echo "selected"; } ?> >Inactive</option>
+        </select>
+      </div>
+    </div>
     <div class="row" style="padding-top: 30px; padding-bottom: 10px;">
       <input type="submit" value="Save" name="accreditation_save" class="btn btn-secondary" style="">&nbsp;
       <a href="/accreditation" class="btn btn-secondary" id="btn-cancel">Cancel</a>
@@ -149,19 +162,6 @@ if(isset($_GET['action'])){
   </div>
   </div>
 
-<div class="container-fluid split">
-  </div>
-  <div class="container-fluid footer">
-    <div class="row">
-      <div class="col">
-        JMDC - Jagas MedicaDenta Corporation<br>
-        #46 Filipinas Avenue, United Parañaque Subd. 5,<br>Sucat, Paranaque City
-      </div>
-      <div class="col text-right">
-        © 2021. All rights reserved.
-      </div>
-    </div>
-  </div>
 
 <script>
 function openNav() {
@@ -209,6 +209,7 @@ function closeNav() {
     username_val=jq("input[name=username]").val()
     email_address_val=jq("input[name=email_address]").val()
     affiliate_level_val=jq("select[name=affiliate_level]").val()
+    accreditation_status= jq('select[name=accreditation_status]').val()
     if not username_val:
       alert('Please input username')
       return False
@@ -228,6 +229,10 @@ function closeNav() {
 
     if not affiliate_level_val:
       alert('Please select affiliate level')
+      return False
+    
+    if not accreditation_status:
+      alert('Please select status')
       return False
   
     username_err=base_validator.validate('username',username_val)
@@ -263,6 +268,7 @@ function closeNav() {
       'contact_number':contact_no_val,
       'email_address':email_address_val,
       'affiliate_level':affiliate_level_val,
+      'is_active':accreditation_status,
       'accreditation_save':'ok'
     }
     data['level']='dentist'

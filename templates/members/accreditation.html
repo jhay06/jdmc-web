@@ -92,6 +92,7 @@ use Modules\Constants\AffiliateLevel;
             <th scope="col">Contact No.</th>
             <th scope="col">Email Address</th>
             <th scope="col">Affiliate Level</th>
+            <th scope='col'>Active</th>
             <th scope="col"></th>
           </tr>
         </thead>
@@ -111,6 +112,7 @@ use Modules\Constants\AffiliateLevel;
                 echo "<td>".$user['contact_number']."</td>";
                 echo "<td>".$user['email_address']."</td>";
                 echo "<td>".AffiliateLevel::get_name( $user['affiliate_level_id'])."</td>";
+               
                 $edit_url="dentist/".$user['username']."/edit";
                 echo "<td><a href='".$edit_url."'><img src=\"static/images/edit.png\"></a></td>";
                 echo "</tr>";
@@ -129,19 +131,7 @@ use Modules\Constants\AffiliateLevel;
   </div>
   </div>
 
-<div class="container-fluid split">
-  </div>
-  <div class="container-fluid footer">
-    <div class="row">
-      <div class="col">
-        JMDC - Jagas MedicaDenta Corporation<br>
-        #46 Filipinas Avenue, United Parañaque Subd. 5,<br>Sucat, Paranaque City
-      </div>
-      <div class="col text-right">
-        © 2021. All rights reserved.
-      </div>
-    </div>
-  </div>
+
 
 <script>
 function openNav() {
@@ -181,9 +171,12 @@ function closeNav() {
             data.append(x['middle_name'])
             data.append(x['contact_number'])
             data.append(x['email_address'])
-            print(x['affiliate_level_id'])
+            
             data.append(AffiliateLevel.get_name(x['affiliate_level_id']))
-          
+            is_active = 'No'
+            if x['is_active']:
+              is_active='Yes'
+            data.append(is_active)
             edit_url='dentist/'+x['username']+'/edit'
             data.append("<a href='"+edit_url+"'><img src=\"static/images/edit.png\"></a>")
             row+=1

@@ -18,6 +18,7 @@ $profile_id=-1;
 $affiliate_level_id=-1;
 $is_activated=false;
 $date_registered=null;
+$is_active = false;
 $is_updating=false;
 if(isset($_POST['accreditation_ok'])){
     $accreditation_ok=$_POST['accreditation_ok']==='true'?true:false;
@@ -50,6 +51,7 @@ if(isset($_GET['action'])){
             $affiliate_level_id=$user_details['affiliate_level_id'];
             $is_activated=$user_details['is_activated'];
             $date_registered=$user_details['date_registered'];
+            $is_active = $user_details['is_active'];
             $is_updating=true;
             if($profile_id != 3){
                 http_response_code(404);

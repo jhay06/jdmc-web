@@ -35,24 +35,27 @@
   .col-sm-6.product-body {
     background-color: rgba(217, 228, 236, .5);
   }
-    .container-fluid.main-con {
+   /* .container-fluid.main-con*/ body {
     background: url("/static/images/official/ABOUT US.jpg") no-repeat center;
-    background-size: auto 1200px;
+    background-size: cover;
     background-position: -500px 0px;
   }
 }
 </style>
 <body style="background-color: var(--primary);">
+  <div class="col soc-med">
+    <div class='soc-med-feed'>
+      <?php include_once("templates/artifacts/soc_med.html"); ?>
+    </div>
+ 
+</div>
 <div class="container-fluid banner">
   <div class="container inner-banner">
     <div class="row">
-      <div class="col company-logo" style=""><a href="/"><img src="/static/images/jmdc-logo-small.png"></a></div>
-      <div class="col company-name"><h3><a href="/">JMDC<br>Imaging Center</a><h3></div>
-      <div class="col soc-med">
-        <a href="https://facebook.com"><img src="/static/images/fb.png"></a>
-        <a href="https://twitter.com"><img src="/static/images/twitter.png"></a>
-        <a href="https://youtube.com"><img src="/static/images/youtube.png"></a>
-      </div>
+      <div class="col company-logo" style=""><a href="/"><img src="/static/images/jmdc-logo.png" width='100px;'></a></div>
+      <!--<div class="col company-name"><h3><a href="/">JMDC<br>Imaging Center</a><h3></div> -->
+      
+       
     </div>
   </div>
 </div>
@@ -65,20 +68,23 @@
   </div>
     <div class="row">
     <div class="col-sm-6 product-body">
-      <h4>Company Profile</h4>
-      <p>JMDC Imaging Center is part of Jagas Medicadenta Corporation. We are also located at Jagas Building #46 6th St. Filipinas Avenue, UPS 5, Parañaque Subdivision, Sucat, Parañaque, 1713 Metro Manila. JMDC Imaging Center team and/or organization focus on providing solutions with a modern digital equipments used by radiologists and dental professionals for various clinical applications including dental implant planning, visualization of abnormal teeth, evaluation of jaws and face, cleft palate assessment, diagnosis of dental caries (cavities) endodontic (root canal) diagnosis, diagnosis of dental trauma.</p>
+      <h4>COMPANY PROFILE</h4>
+      <p>JMDC IMAGING CENTER IS PART OF JAGAS MEDICADENTA CORPORATION
+        WE ARE ALSO LOCATED AT JAGAS BUILDING #46 6TH ST. FILIPINAS AVENUE, UPS 5, PARAÑAQUE SUBDIVISION, SUCAT, PARAÑAQUE, 1713 METRO MANILA.
+        JMDC IMAGING CENTER TEAM AND/OR ORGANIZATION FOCUS ON PROVIDING SOLUTIONS WITH A MODERN DIGITAL EQUIPMENTS USED BY RADIOLOGISTS AND DENTAL PROFESSIONALS FOR VARIOUS CLINICAL APPLICATIONS INCLUDING DENTAL IMPLANT PLANNING, VISUALIZATION OF ABNORMAL TEETH, EVALUATION OF JAWS AND FACE, CLEFT PALATE ASSESSMENT, DIAGNOSIS OF DENTAL CARIES (CAVITIES) ENDODONTIC (ROOT CANAL) DIAGNOSIS, DIAGNOSIS OF DENTAL TRAUMA.
+        </p>
 </div>
 </div>
     <div class="row">
     <div class="col-sm-6 product-body">
-      <h4>Mission</h4>
-      <p>Our mission is to provide compassionate, caring, diagnose and create a surgical plan for a variety of procedures and/or the most effective diagnostic imaging technology with high-tech medical facility that will allow them to enjoy safe, long-lasting and comfortable to improve the quality of life.</p>
+      <h4>MISSION</h4>
+      <p>OUR MISSION IS TO PROVIDE COMPASSIONATE, CARING, DIAGNOSE AND CREATE A SURGICAL PLAN FOR A VARIETY OF PROCEDURES AND/OR THE MOST EFFECTIVE DIAGNOSTIC IMAGING TECHNOLOGY WITH HIGH-TECH MEDICAL FACILITY THAT WILL ALLOW THEM TO ENJOY SAFE, LONG-LASTING AND COMFORTABLE TO IMPROVE THE QUALITY OF LIFE.</p>
 </div>
 </div>
     <div class="row">
     <div class="col-sm-6 product-body">
-      <h4>Vision</h4>
-      <p>Our vision to establish nationally and internationally recognized as an outstanding for maintaining the highest level of patients care satisfaction and comfort.</p>
+      <h4>VISION</h4>
+      <p>OUR VISION TO ESTABLISH NATIONALLY AND INTERNATIONALLY RECOGNIZED AS AN OUTSTANDING FOR MAINTAINING THE HIGHEST LEVEL OF PATIENTS CARE SATISFACTION AND COMFORT</p>
 </div>
 </div>
 </div>
@@ -86,21 +92,7 @@
   
   </div>
 
-
-<!-- FOOTER -->
-<div class="container-fluid split">
-</div>
-<div class="container-fluid footer">
-  <div class="row">
-    <div class="col-7">
-      JMDC Imaging Center<br>
-      #46 Filipinas Avenue, <br>United Parañaque Subd. 5,<br>Sucat, Paranaque City
-    </div>
-    <div class="col-5 text-right">
-      © 2021. All rights reserved.
-    </div>
-  </div>
-</div>    	
+	
 
 </body>
 </html>

@@ -10,6 +10,7 @@ if(isset($_POST['reg'])){
     $middle_name=$_POST['middle_name'];
     $last_name=$_POST['last_name'];
     $email_address=$_POST['email_address'];
+  
     if(!isset($_POST['username'])){
         $arr['status']='failed';
         $arr['message']='Please input username';
@@ -37,6 +38,7 @@ if(isset($_POST['reg'])){
         $api_reg->email_address=$_POST['email_address'];
         $api_reg->password=$pass->generate(8);
         $api_reg->is_accreditation=false;
+        $api_reg->is_active= true;
         $res=$api_reg->process();
         if($api_reg->is_error()==false){
             $result=$api_reg->get_result();

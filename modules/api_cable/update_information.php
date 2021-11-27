@@ -5,6 +5,13 @@ if(isset($_POST['reg']) || isset($_POST['accreditation_save'])){
     $old_username=$_POST['old_username'];
     $employee_no=null;
     $old_employee_no=null;
+    $is_active = 0;
+    if(isset($_POST['reg'])){
+        $is_active =1;
+    }
+    else if(isset($_POST['accreditation_save'])){
+        $is_active= intval($_POST['is_active']);
+    }
     if(isset($_POST['old_employee_no'])){
         $old_employee_no=$_POST['old_employee_no'];
 
@@ -39,6 +46,7 @@ if(isset($_POST['reg']) || isset($_POST['accreditation_save'])){
         $suffix=$_POST['suffix'];
     }
 
+    
     $level=$_POST['level'];
     if(isset($level)){
         $arr=array();
@@ -59,6 +67,10 @@ if(isset($_POST['reg']) || isset($_POST['accreditation_save'])){
             $err=true;
             $arr['status']='failed';
             $arr['message']='Please input email address';
+        }else if($is_active == -1){
+            $err=true;
+            $arr['status'] = 'failed';
+            $arr['message']= 'Invalid status';
         }
 
         if($level=='staff'){
@@ -105,6 +117,7 @@ if(isset($_POST['reg']) || isset($_POST['accreditation_save'])){
             $update_api->contact_no=$contact_no;
             $update_api->is_activated=$is_activated;
             $update_api->date_registered=$date_registered;
+            $update_api->is_active=$is_active ===1?true:false;
             //print_r($update_api);
             $res=$update_api->process();
           //  print_r($res);

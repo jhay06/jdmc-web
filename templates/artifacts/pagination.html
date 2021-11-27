@@ -53,53 +53,61 @@
         <?php
             if(isset($_GET['page'])){
                 $total_count=intval($_GET['total_count']);
-                $current_page=intval($_GET['page']);
-                $limit= intval($_GET['limit']);
-                $total_page=1;
-
-                if($total_count > $limit){
-                    
-                    $total_page=ceil( $total_count/$limit);
-                }
-
-                if($current_page == 0){
-                    $current_page+=1;
-                }
-                $start=$current_page-1;
-                if($total_page > 1){
-                    $page=0;
-                    while($page < $total_page){
-                        $class="pagination-page";
+                if($total_count != 0){
+                    $current_page=intval($_GET['page']);
+                    $limit= intval($_GET['limit']);
+                    $total_page=1;
+    
+                    if($total_count > $limit){
                         
-                        if($page ==0){
-                            $class = $class." rad-left";
-                        }else if($page == ($total_page -1)){
-                            $class= $class." rad-right";
+                        $total_page=ceil( $total_count/$limit);
+                    }
+    
+                    if($current_page == 0){
+                        $current_page+=1;
+                    }
+                    $start=$current_page-1;
+                    if($total_page > 1){
+                        $page=0;
+                        while($page < $total_page){
+                            $class="pagination-page";
+                            
+                            if($page ==0){
+                                $class = $class." rad-left";
+                            }else if($page == ($total_page -1)){
+                                $class= $class." rad-right";
+                            }
+                            if($current_page == ($page+1)){
+                                $class = $class." active";
+                            }
+                            ?>
+                            <a href='#' page='<?php echo $page+1; ?>' class='<?php echo $class; ?>'>
+                                <div page="<?php echo $page+1; ?>" class='pagination-count'>
+                                    <label page="<?php echo $page+1; ?>"><?php echo $page+1 ?></label>
+                                </div>
+                            </a>
+    
+                            <?php
+                            $page++;
+    
                         }
-                        if($current_page == ($page+1)){
-                            $class = $class." active";
-                        }
+                    }else{
                         ?>
-                        <a href='#' page='<?php echo $page+1; ?>' class='<?php echo $class; ?>'>
+                     
+                        <a href='#' page='<?php echo $page+1; ?>' class='pagination-page rad-left active'>
                             <div page="<?php echo $page+1; ?>" class='pagination-count'>
-                                <label page="<?php echo $page+1; ?>"><?php echo $page+1 ?></label>
+                                <label page="<?php echo $page+1; ?>">1</label>
                             </div>
                         </a>
-
+    
                         <?php
-                        $page++;
-
                     }
                 }else{
                     ?>
-                    <a href='#' page='<?php echo $page+1; ?>' class='pagination-page rad-left active'>
-                        <div page="<?php echo $page+1; ?>" class='pagination-count'>
-                            <label page="<?php echo $page+1; ?>">1</label>
-                        </div>
-                    </a>
-
+                        <div></div>
                     <?php
                 }
+
 
             }
 

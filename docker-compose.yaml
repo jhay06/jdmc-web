@@ -12,6 +12,7 @@ services:
     command: /bin/bash -c "service lighttpd start && tail -f /dev/null"
     volumes:
       - ./etc/conf:/etc/lighttpd
+      - /etc/hosts:/etc/hosts:ro
       - .:/jmdc
     restart: always
     ports:
